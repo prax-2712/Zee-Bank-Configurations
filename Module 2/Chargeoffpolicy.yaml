@@ -1,0 +1,80 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: Configuration
+metadata:
+  name: zee.chargeoff.configuration.us.affluent
+  namespace: athena-pci
+spec:
+  config:
+    format: YAML
+    key: zee.chargeoff.policy.us.affluent
+    value:
+
+      validFrom: '2026-01-01T00:00:00.000-05:00'
+      validTo: '2999-12-31T00:00:00.000-05:00'
+
+      policyOverview:
+        name: Zee US Charge-Off Policy
+        description: US compliant charge-off policy for affluent credit card accounts
+
+      accountingConfiguration:
+        enabled: true
+        accountingType: SYSTEM_LEDGER
+
+        # Charge-off happens exactly at 180 DPD
+        autoChargeOffAccounting:
+          trigger: DPD_180
+          timing: END_OF_DAY
+
+        manualChargeOffAccounting:
+          enabled: true
+
+        recoverySettlementPriority:
+          - fees
+          - interest
+          - principal
+
+      classificationConfiguration:
+
+        preChargeOff:
+          fromDPD: 120
+          toDPD: 179
+          description: High risk delinquent account
+
+        chargeOff:
+          dpdThreshold: 180
+          description: Mandatory regulatory charge-off
+
+      writeOffConfiguration:
+        enabled: true
+
+        # Write-off is accounting cleanup, not regulatory trigger
+        accountingEnabled: true
+
+        writeOffRules:
+          type: POST_CHARGE_OFF
+
+          # Optional internal accounting write-off
+          writeOffAfterDays: 30
+
+          # No minimum threshold for charge-off
+          minimumAmount: 0
+
+      postChargeOffConfiguration:
+
+        collections:
+          enabled: true
+          allowExternalAgencies: true
+
+        interestTreatment:
+          accruePostChargeOff: false
+
+        creditBureauReporting:
+          status: CHARGE_OFF
+          continueReporting: true
+
+  metadata:
+    description: US-compliant charge-off policy for affluent credit cards
+    id: zee.chargeoff.policy.us.affluent
+    name: Zee US Charge-Off Policy
+    tenantCode: zee
+    tenantId: '999999'

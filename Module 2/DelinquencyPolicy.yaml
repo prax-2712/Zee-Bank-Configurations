@@ -1,0 +1,81 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: Configuration
+metadata:
+  name: zee.delinquency.configuration.us.affluent
+  namespace: ruby
+spec:
+  config:
+    format: YAML
+    key: zee.delinquency.policy.us.affluent
+    value:
+
+      validFrom: '2026-01-01T00:00:00.000-05:00'
+      validTo: '2999-12-31T00:00:00.000-05:00'
+
+      # ✅ Payment Variance (Tolerance)
+      paymentVariance:
+        varianceType: FIXED
+        percentageValue: 0
+        paymentVarianceLimit:
+          minValue: 0
+          maxValue: 5
+        currency: USD
+        amount: 5.00
+
+      # ✅ Late Fee Variance
+      lateFeeVariance:
+        varianceType: FIXED
+        percentageValue: 0
+        paymentVarianceLimit:
+          minValue: 0
+          maxValue: 5
+        amount: 5.00
+
+      # ✅ Aging Basis (US STANDARD)
+      delinquencyAgingBasis: DUE_DATE
+      dpdAgingBasis: DUE_DATE
+
+      # ✅ Delinquency Rules (US STANDARD BUCKETS)
+      delinquencyRules:
+
+        - level: CURRENT
+          description: Account is current
+          fromDays: 0
+          toDays: 29
+
+        - level: DPD_30
+          description: 30 days past due
+          fromDays: 30
+          toDays: 59
+
+        - level: DPD_60
+          description: 60 days past due
+          fromDays: 60
+          toDays: 89
+
+        - level: DPD_90
+          description: 90 days past due (seriously delinquent)
+          fromDays: 90
+          toDays: 119
+
+        - level: DPD_120
+          description: 120 days past due (pre charge-off)
+          fromDays: 120
+          toDays: 149
+
+        - level: DPD_150
+          description: 150 days past due (charge-off pending)
+          fromDays: 150
+          toDays: 179
+
+        - level: CHARGE_OFF
+          description: Charged-off account (regulatory requirement)
+          fromDays: 180
+          toDays: 9999
+
+  metadata:
+    description: US-compliant delinquency policy for affluent credit cards
+    id: zee.delinquency.policy.us.affluent
+    name: Zee US Affluent Delinquency Policy
+    tenantCode: zee
+    tenantId: '999999'

@@ -1,0 +1,28 @@
+kind: Clock
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: lsg.aura.clock.module.8005
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.lsg","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.lsg.git","filePath":"module_configurations/module_aura/clocks/clock_8005.yaml","tenantCode":"lsg"}'
+  namespace: aura
+spec:
+  metadata:
+    id: aura.clock.module.8005
+    name: aura.clock.module.8005
+    description: aura.clock.module.8005
+    tenantId: '600309'
+    tenantCode: lsg
+  calendarCode: CALUS008005
+  cbuDuration: 1
+  cbusInAdvance: 10 # Number of CBUs to be generated in advance means that when the clock is generated, it will generate CBUs for the next 10 cycles based on the calendar and cbuDuration.
+  code: CLKUS008005
+  name: US New Monthly Clock CLKUS008005
+  clockStartTimeDate: '2000-01-01'
+  clockStartTimeHours: 0
+  status: ENABLED
+  type: BOOK
+
+
+

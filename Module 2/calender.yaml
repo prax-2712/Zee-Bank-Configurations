@@ -1,0 +1,22 @@
+kind: Calendar
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: lsg.aura.calendar.module.8005
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.lsg","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.lsg.git","filePath":"module_configurations/module_aura/calendars/calendar_8005.yaml","tenantCode":"lsg"}'
+  namespace: aura
+spec:
+  metadata:
+    id: aura.calendar.module.8005
+    name: aura.calendar.module.8005
+    description: aura.calendar.module.8005
+    tenantId: '600309'
+    tenantCode: lsg
+  code: CALUS008005
+  description: US New Monthly Calendar CALUS008005
+  name: US New Weekly Calendar CALUS008005
+  timezone: America/New_York
+  weekStartOffset: 1
+  yearStartDate: 01-01

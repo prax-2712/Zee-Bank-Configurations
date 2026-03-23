@@ -1,0 +1,62 @@
+kind: Channelcode
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: lsg.athena.channelcode.rupay-channel-1101
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  namespace: athena
+spec:
+  metadata:
+    id: athena.channelcode.rupay-channel-1101
+    name: RUPAY UK Offus Channel for Zee
+    description: RUPAY UK Offus Channel for Zee
+    requester:
+      module: athena
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: zee
+  channelCodeId: CHNUKZZ1001
+  code: CHNUKZZ1001
+  name: RUPAY UK Offus Channel for Zee
+  description: RUPAY UK Offus Channel for Zee
+  status: ACTIVE
+  channelType: India Offus Issuer Channel
+  tags: []
+  paymentCodes:
+    - PMCUKZZ100101046
+    - PMCUKZZ100100047
+    - PMCUKZZ100101004
+    - PMCUKZZ100100004
+    - PMCUKZZ100101040
+    - PMCUKZZ100100034
+    - PMCUKZZ100110040
+    - PMCUKZZ100111040
+  
+  channelSpecification:
+    authorizationConfiguration:
+      transactionExpirySpecification:
+        defaultConfiguration:
+          timeZone: UTC
+          days: 7
+          hours: 0
+        ruleBasedConfigurations:
+          - filters:
+              - type: TRANSACTION_PROPERTIES
+                transactionProperties:
+                  authType: PREAUTH
+                  transactionOrigination: DOMESTIC
+            filteringCriteria: ALL_FILTERS_SHOULD_PASS
+            timeZone: UTC
+            hours: 168
+            configType: ISSUER_DEFINED
+          - filters:
+              - type: TRANSACTION_PROPERTIES
+                transactionProperties:
+                  authType: PREAUTH
+                  transactionOrigination: INTERNATIONAL
+            filteringCriteria: ALL_FILTERS_SHOULD_PASS
+            timeZone: UTC
+            hours: 240
+            configType: ISSUER_DEFINED
+    clearanceConfiguration: |
+      {"isRefundGreaterThanAuthSupported": "true"}

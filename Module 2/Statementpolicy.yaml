@@ -1,0 +1,251 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: StatementPolicy
+metadata:
+  name: us.affluent.statementpolicy.9001
+spec:
+  metadata:
+    id: statement.statementpolicy.9001
+    name: Zee Bank Affluent US Statement Policy
+    description: Statement Policy for Affluent US Credit Card Customers
+    logolUrl: https://assets.zee.com/statement-templates/affluent/v1/zee-logo.png
+    
+    requester:
+      module: statement
+      moduleVersion: 1.0.0
+    tenantId: '999999'
+    tenantCode: zee
+  validFrom: '2026-01-01T00:00:00.000-05:00'
+  validTill: '2999-12-31T00:00:00.000-05:00'
+  name: Zee Bank Affluent Credit Card Statement Policy
+  description: Premium statement policy for affluent US credit card customers, compliant with all US regulations.
+  code: STMUS900001
+  physicalStatementThreshold: '10'
+  password: function password(context) { return context.last4SSN + context.zipCode; }
+  statementTemplateCode: https://assets.zee.com/statement-templates/affluent/v1/template.html
+  lockbox:
+    lockboxNumber: '888888'
+    lockboxAttributes:
+      - fieldName: accountNumber
+        include: Y
+        order: 1
+      - fieldName: minimumAmountDue
+        include: Y
+        order: 2
+      - fieldName: totalAmountDue
+        include: Y
+        order: 3
+      - fieldName: dueDate
+        include: Y
+        order: 4
+      - fieldName: rewardsPoints
+        include: Y
+        order: 5
+      - fieldName: eliteTier
+        include: Y
+        order: 6
+      - fieldName: conciergeContact
+        include: Y
+        order: 7
+      - fieldName: checkDigit
+        include: Y
+        order: 8
+    encodingType: OCR A
+  metaData:
+    specialTemplateCodes:
+      PLATINUM: https://assets.zee.com/statement-templates/affluent/v1/platinum.html
+      BLACK: https://assets.zee.com/statement-templates/affluent/v1/black.html
+    digitalPdfUrlExpiresInDays: '7'
+    digitalPdfUrlExpiresInHours: '0'
+    digitalPdfUrlExpiresInMinutes: '0'
+  skipStatementRules: function skipStatementRules(context) { return false; }
+  forceStatementGenerationRules: function forceStatementGenerationRules(context) { return context.vipOverride === true; }
+  templateCode: us-zee-affluent
+  messageConfigs:
+    maxMessageCount: 5
+    defaultRule:
+      name: STATEMENT_PDF_MESSAGE
+      code: STMT_RULE_0
+      status: ENABLED
+      priority: 1
+      order: 1
+      condition: 'true'
+      content: Thank you for being a valued Zee Card member. For exclusive offers, visit our Platinum Concierge portal.
+      frequency: EVERYTIME
+      metaData:
+        isSuppressed: false
+        messageHeader: Welcome, Platinum Member!
+    ruleList:
+      - name: STATEMENT_PDF_MESSAGE
+        code: STMT_RULE_1
+        status: ENABLED
+        priority: 2
+        order: 1
+        condition: input.rewardsPointsEarned > 0
+        content: Congratulations! You earned @{input.rewardsPointsEarned} points this cycle. Redeem for luxury travel, fine dining, or exclusive experiences.
+        frequency: EVERYTIME
+        metaData:
+          isSuppressed: false
+          messageHeader: Rewards Earned
+      - name: STATEMENT_PDF_MESSAGE
+        code: STMT_RULE_2
+        status: ENABLED
+        priority: 3
+        order: 1
+        condition: input.eliteTier == 'PLATINUM' || input.eliteTier == 'BLACK'
+        content: As a @{input.eliteTier} member, you have access to 24/7 zee concierge, airport lounge access, and premium travel insurance.
+        frequency: EVERYTIME
+        metaData:
+          isSuppressed: false
+          messageHeader: Elite Benefits
+      - name: STATEMENT_PDF_MESSAGE
+        code: STMT_RULE_3
+        status: ENABLED
+        priority: 4
+        order: 1
+        condition: input.accountHolder.address.state == 'CA'
+        content: California residents: For information about your rights, visit https://oag.ca.gov/privacy/ccpa.
+        frequency: EVERYTIME
+        metaData:
+          isSuppressed: false
+          messageHeader: California Privacy Notice
+      - name: STATEMENT_PDF_MESSAGE
+        code: STMT_RULE_4
+        status: ENABLED
+        priority: 5
+        order: 1
+        condition: input.accountHolder.tags != null && input.accountHolder.tags.get('DECEASE') != null && input.accountHolder.tags.get('DECEASE').value=='Y'
+        content: This account has been designated as belonging to a deceased individual. Please accept our condolences. Contact our Platinum Support at 1-800-999-9999.
+        frequency: EVERYTIME
+        metaData:
+          isSuppressed: false
+          messageHeader: Account Status
+      - name: STATEMENT_PDF_MESSAGE
+        code: STMT_RULE_5
+        status: ENABLED
+        priority: 6
+        order: 1
+        condition: input.billingSummary.disputeDataDto != null && input.billingSummary.disputeDataDto.totalOutstandingDisputedClosingBalance>0
+        content: We are currently investigating your dispute. You are not responsible for the disputed charges during this period.
+        frequency: EVERYTIME
+        metaData:
+          isSuppressed: false
+          messageHeader: Dispute in Progress
+  rewardConfig:
+    showSummary: true
+    showIssuance: true
+    showStatement: true
+  paymentInstrumentConfig:
+    allowStatementGenerationWithoutCardFormFactor: true
+    isAddOn: true
+  schumerBoxConfig:
+    schumerMonthsToRepay:
+      - 6
+      - 12
+      - 24
+    showTotalCostOnMinimumPayment: true
+    showPaymentWarning: true
+  rateChangeSummaryConfig:
+    showRateChangeSummary: true
+  estimatedInterestConfig:
+    estimatedInterestBreakDownCount: 3
+  interestBreakupConfig:
+    allowedBalanceTypes:
+      - retail
+      - cash
+      - balance_transfer
+      - travel
+      - dining
+      - entertainment
+      - luxury_retail
+      - jewelry
+      - electronics
+      - hospitality
+      - airline
+      - hotel
+      - cruise
+      - private_aviation
+      - ground_transport
+      - rideshare
+      - fuel
+      - healthcare
+      - education
+      - insurance
+      - utilities
+      - digital_services
+      - subscription
+      - international_spend
+      - forex
+      - fees
+      - interest
+      - tax_payments
+      - government_payments
+
+    allowedPromotionalBalanceTypes:
+      - retail
+      - travel
+      - dining
+      - luxury_retail
+      - electronics
+      - airline
+      - hotel
+      - private_aviation
+      - jewelry
+      - healthcare
+      - education
+      - balance_transfer
+      - installment_plan
+      - big_ticket_purchase
+
+  cardBasedTransactionConfig:
+    allowedVoucherCodes:
+      - LUXURY_TRAVEL
+      - BUSINESS_CLASS_UPGRADE
+      - FIRST_CLASS_UPGRADE
+      - AIRLINE_CREDIT
+      - PRIVATE_JET
+      - HELICOPTER_TRANSFER
+      - AIRPORT_FAST_TRACK
+      - AIRPORT_LOUNGE
+      - GLOBAL_ENTRY_FEE
+      - TSA_PRECHECK
+      - HOTEL_CREDIT
+      - RESORT_CREDIT
+      - SUITE_UPGRADE
+      - EARLY_CHECKIN
+      - LATE_CHECKOUT
+      - VIP_HOTEL_ACCESS
+      - FINE_DINING
+      - MICHELIN_DINING
+      - CHEF_TABLE
+      - WINE_TASTING
+      - PRIVATE_DINING
+      - YACHT_CHARTER
+      - PRIVATE_ISLAND
+      - LUXURY_CRUISE
+      - SAFARI_EXPERIENCE
+      - LUXURY_CAR_RENTAL
+      - CHAUFFEUR_SERVICE
+      - LIMOUSINE_SERVICE
+      - LUXURY_SHOPPING
+      - PERSONAL_STYLIST
+      - DESIGNER_BOUTIQUE
+      - WATCH_JEWELRY
+      - ART_GALLERY_ACCESS
+      - VIP_EVENT_ACCESS
+      - CONCERT_BACKSTAGE
+      - SPORTS_VIP_BOX
+      - FASHION_WEEK
+      - FILM_FESTIVAL_PASS
+      - SPA_RETREAT
+      - WELLNESS_PROGRAM
+      - MEDICAL_CONCIERGE
+      - FITNESS_MEMBERSHIP
+      - WEALTH_CONSULTATION
+      - TAX_ADVISORY
+      - FAMILY_OFFICE_ACCESS
+      - INTERIOR_DESIGN
+      - SMART_HOME_SERVICE
+      - HOME_CONCIERGE
+      - LUXURY_GIFTING
+      - FESTIVE_GIFT_BOX
+      - PERSONALIZED_GIFTS
