@@ -1,0 +1,45 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyRepaymentReversalWithFeePolicy
+metadata:
+  name: lsg.ruby.repaymentreversalwithfeepolicy.1001
+spec:
+  metadata:
+    id: ruby.repaymentreversalwithfeepolicy.1001
+    name: 1001 Repayment Reversal with Fee Policy
+    description: 1001 Repayment Reversal with Fee Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Repayment Reversal with Fee Policy
+  code: RRFUS001001
+  description: Repayment Reversal with Fee Policy
+  modelParameters:
+    assessmentType: REPEATED_OFFENCE
+    chequeReturnReasonCodes:
+      - CHEQUE_RETURN_WITH_FEE
+      - INSUFFICIENT_FUNDS
+      - ACCOUNT_CLOSED
+      - UNABLE_TO_LOCATE_ACCOUNT
+      - INVALID_ACCOUNT_NUMBER
+      - CUSTOMER_REVOKED_AUTHORIZATION
+      - PAYMENT_STOPPED
+      - INVALID_ACH_ROUTING_NUMBER
+      - BENEFICIARY_OR_ACCOUNT_HOLDER_DECEASED
+      - ACCOUNT_FROZEN_OR_RETURNED_PER_OFAC
+    repeatedOccurrenceAmount:
+      baseAmount: 4000
+    firstOccurrenceAmount:
+      baseAmount: 3000
+    ceilingLimitLevel: MINIMUMPAYMENTDUE
+    maxFeeDebitsPerCycle: 3
+    restrictOnLatefee: true
+    repeatOccurrenceWindow:
+      type: CYCLES
+      count: '3'
+    considerReversedInstances: false
+  precedenceCode: ZZ0015
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  templateCode: us-credit

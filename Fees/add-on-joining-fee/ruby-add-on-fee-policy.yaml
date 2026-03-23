@@ -1,0 +1,39 @@
+kind: RubyAddOnFeePolicy
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: lsg.ruby.addonfeepolicy.module.1001
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.lsg","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.lsg.git","filePath":"module_configurations/module_ruby/add-on-joining-fee-policies/ruby-add-on-fee-policy_1001.yaml","tenantCode":"lsg"}'
+spec:
+  metadata:
+    id: ruby.addonfeepolicy.module.1001
+    name: ruby.addonfeepolicy.module.1001
+    description: ruby.addonfeepolicy.module.1001
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Ruby Add-on User Joining Fee Policy
+  code: AJFUS001001
+  description: Ruby Add-on User Joining Fee Policy
+  modelParameters:
+    fixedAmount:
+      baseFee:
+        amount: 7500
+        currency: USD
+    feeCriteria:
+      feeBasisEntity: AH
+      feePerEntity: true
+      thresholdCount: 0
+      includeAllEntities: false
+  chargeStrategy: DIRECT-APPLY
+  chargeStrategyConfig:
+    application:
+      applyOn: keyDateSpecification://code/ACCOUNT_OPEN_DATE
+      offsetDaysForValueDate: '0'
+  validFrom: '2000-01-01T00:00:00.000-07:00'
+  validTill: '2999-01-01T00:00:00.000-07:00'
+  templateCode: us-credit

@@ -1,0 +1,43 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyRepaymentFeePolicy
+metadata:
+  name: lsg.ruby.rubyrepaymentfeepolicy.3013
+spec:
+  metadata:
+    id: ruby.rubyrepaymentfeepolicy.3013
+    name: 3013 Ruby Repayment Fee Policy
+    description: 3013 Ruby Repayment Fee Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Ruby Repayment Fee Policy
+  code: RPFUS003013
+  description: Ruby Repayment Fee Policy
+  modelParameters:
+    channelPaymentModeConfigurations:
+      - feeType: FIXED_AMOUNT
+        channelCode: ONLINE
+        paymentMode: ACH
+        fixedAmount:
+          baseFee:
+            amount: 150
+            currency: USD
+      - feeType: VARIABLE_AMOUNT
+        channelCode: IVR
+        paymentMode: ACH
+        variableAmount:
+          range:
+            min: 150
+          percentage: 1.5
+      - feeType: VARIABLE_AMOUNT
+        channelCode: ONLINE
+        paymentMode: DEBITCARD
+        variableAmount:
+          range:
+            min: 200
+          percentage: 2
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  templateCode: us-credit

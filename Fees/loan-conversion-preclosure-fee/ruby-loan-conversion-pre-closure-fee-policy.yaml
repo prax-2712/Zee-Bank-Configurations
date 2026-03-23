@@ -1,0 +1,27 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyLoanConversionPreClosureFeePolicy
+metadata:
+  name: lsg.ruby.loanpreclosurefeepolicy.8001
+spec:
+  code: LCPUS008001
+  description: loan conversion fee policy changed
+  metadata:
+    description: 8001 loan preclosure fee policy
+    id: ruby.loanpreclosurefeepolicy.8001
+    name: 8001 loanpreclosure fee policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantCode: lsg
+    tenantId: '600309'
+  modelParameters:
+    isDerivedChargeComponentNotRequired: true
+    preClosureFee: 0
+    waiverReasonCode:
+      - PRECLOSED_REFUND
+      - PRECLOSED_CHARGEOFF
+      - PRECLOSED_DELINQUENCY
+  name: loan conversion preclosure fee adjustment  policy
+  templateCode: us-credit
+  validFrom: '2010-04-01T00:00:00.000+05:30'
+  validTill: '2999-12-31T00:00:00.000+05:30'

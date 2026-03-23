@@ -1,0 +1,42 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyForexMarkupFeePolicy
+metadata:
+  name: lsg.ruby.rubyforexmarkupfeepolicy.6001
+spec:
+  metadata:
+    id: ruby.rubyforexmarkupfeepolicy.6001
+    name: 6001 Forex Markup Fee Policy
+    description: 6001 Forex Markup Fee Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Forex Markup Fee Policy
+  code: FCFUS006001
+  description: Forex Markup Fee Policy
+  modelParameters:
+    variableAmount:
+      - domestic: 'true'
+        crossCurrency: 'false'
+        range:
+          min: 0.0
+        percentage: 0.0
+      - domestic: 'true'
+        crossCurrency: 'true'
+        range:
+          min: 0.0
+        percentage: 0.0
+      - domestic: 'false'
+        crossCurrency: 'true'
+        range:
+          min: 0.0
+        percentage: 0.0
+      - domestic: 'false'
+        crossCurrency: 'false'
+        range:
+          min: 0.0
+        percentage: 0.0
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  templateCode: us-credit

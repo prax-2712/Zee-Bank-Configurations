@@ -1,0 +1,32 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyAnnualFeePolicy
+metadata:
+  name: lsg.ruby.rubyannualfeeepolicy.3003
+spec:
+  metadata:
+    id: ruby.rubyannualfeeepolicy.3003
+    name: 3003 Ruby Annual Fee Policy
+    description: Default Ruby Annual Fee Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Ruby Annual Fee Policy
+  code: ANFUS003003
+  description: Ruby Annual Fee Policy
+  modelParameters:
+    fixedAmount:
+      baseFee:
+        amount: 50000
+        currency: USD
+  chargeStrategy: DIRECT-APPLY
+  chargeStrategyConfig:
+    application:
+      applicabilityOnwards: keyDateSpecification://code/FIRST_ANNIVERSARY_OF_ACCOUNT_OPEN_DATE
+      applyOn: keyDateSpecification://code/BILLING_DATE
+      offsetDaysForValueDate: '0'
+  remarks: Annual Fee (billed monthly)
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  templateCode: us-credit

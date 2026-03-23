@@ -1,0 +1,32 @@
+kind: RubyAccountSetupFeePolicy
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: lsg.tdr.rubyaccountsetupfeepolicy.module.3002
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.lsg","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.lsg.git","filePath":"module_configurations/module_ruby/account-setup-fee-policies/ruby-account-setup-fee-policy_3002.yaml","tenantCode":"lsg"}'
+spec:
+  metadata:
+    id: tdr.rubyaccountsetupfeepolicy.module.3002
+    name: tdr.rubyaccountsetupfeepolicy.module.3002
+    description: tdr.rubyaccountsetupfeepolicy.module.3002
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Account Setup Fee Policy
+  code: ASFUS003002
+  description: Account Setup Fee Policy
+  modelParameters:
+    fixedAmount:
+      baseFee:
+        amount: 20000
+        currency: USD
+    chargeStrategy: DIRECT-APPLY
+    chargeStrategyConfig:
+      application:
+        applyOn: keyDateSpecification://code/ACCOUNT_OPEN_DATE
+        voucherCode: ACCOUNT_SETUP_FEE
+        offsetDaysForValueDate: '0'
+  validFrom: '2000-01-31T21:39:01.795+05:30'
+  validTill: '2999-07-25T21:39:01.795+05:30'
+  templateCode: us-credit

@@ -1,0 +1,29 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyCardReplacementFeePolicy
+metadata:
+  name: lsg.ruby.rubycardreplacementfeepolicy.6002
+spec:
+  metadata:
+    id: ruby.rubycardreplacementfeepolicy.6002
+    name: 6002 Ruby Card Replacement Fee Policy
+    description: 6002 Ruby Card Replacement Fee Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Ruby Card Replacement Fee Policy
+  code: CRFUS006002
+  description: Ruby Card Replacement Fee Policy
+  modelParameters:
+    fixedAmount:
+      baseFee:
+        amount: 0
+        currency: USD
+    replacementCardIdentifier:
+      - key: cardSkuID
+        value:
+          - SKUUS005001_CARDWORKSUAT
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  templateCode: us-credit

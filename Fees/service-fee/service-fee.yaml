@@ -1,0 +1,22 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyServiceFeePolicy
+metadata:
+  name: lsg.ruby.rubyservicefeepolicy.3013
+spec:
+  code: SERUS003013
+  description: service fee policy
+  metadata:
+    id: ruby.rubyservicefeepolicy.3013
+    name: 3013 Ruby Service Fee Policy
+    description: 3013 Ruby Service Fee Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  modelParameters:
+    amount: 500
+  name: service fee adjustment policy
+  templateCode: us-credit
+  validFrom: '2000-01-01T00:00:00.000+05:30'
+  validTill: '2999-12-31T00:00:00.000+05:30'

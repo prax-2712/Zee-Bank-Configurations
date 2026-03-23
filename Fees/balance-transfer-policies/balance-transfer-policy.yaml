@@ -1,0 +1,27 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyBalanceTransferPolicy
+metadata:
+  name: lsg.ruby.rubybalancetransferpolicy.3002
+spec:
+  metadata:
+    id: ruby.rubybalancetransferpolicy.3002
+    name: 3002 Balance Transfer Policy
+    description: 3002 Balance Transfer Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Balance Transfer Policy
+  code: BTPUS003002
+  description: Balance Transfer Policy
+  minCreditLimit: 10000
+  minBalanceTransferAmount: 5000
+  maximumDelinquencyLevel: 2
+  modelParameters:
+    range:
+      min: 500
+    balanceTransferFeePercentage: 5.0
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  templateCode: us-credit

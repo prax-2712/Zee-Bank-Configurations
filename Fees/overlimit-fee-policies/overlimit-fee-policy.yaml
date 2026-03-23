@@ -1,0 +1,28 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyOverLimitFeePolicy
+metadata:
+  name: lsg.ruby.rubyoverlimitfeepolicy.2001
+spec:
+  metadata:
+    id: ruby.rubyoverlimitfeepolicy.2001
+    name: 2001 Ruby OverLimit Fee Policy
+    description: 2001 Ruby OverLimit Fee Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Ruby Over Limit Fee Policy
+  code: OVLUS002001
+  description: Ruby Over Limit Fee Policy
+  modelParameters:
+    maxDebitsCount: 3
+    thresholdPercentage: 0
+    chargeDefinition:
+      variableAmount:
+        range:
+          min: 0
+        percentage: 0
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  templateCode: us-credit
