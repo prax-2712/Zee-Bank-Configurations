@@ -1,0 +1,42 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: EmeraldInterestPolicy
+metadata:
+  name: lsg.emerald.emeraldinterestpolicy.8005
+spec:
+  metadata:
+    id: emerald.emeraldinterestpolicy.8005
+    name: Bank Zee US Premium Fixed-Fee Policy  # CHANGED
+    description: Bank Zee US Premium Fixed-Fee Policy  # CHANGED
+    requester:
+      module: emerald-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: US Fixed-Fee Interest Policy
+  code: EIPUS008005
+  description: US Fixed-Fee BNPL Interest Policy
+  validFrom: '2010-03-06T00:00:00.000+05:30'
+  validTill: '2999-12-31T00:00:00.000+05:30'
+  creditEffectiveFrom: ValueDate
+  debitEffectiveFrom: ValueDate
+  interestAccrual:
+    accountLevelRate: true
+    dayCountMethods:
+      - lifeCycleEvent: default
+        dayCountMethod: 30/360            
+    roundingRule: NEAR
+    dayCountMethod: 30/360                 
+  interestLiquidation:
+    liquidationVoucherCode: LOAN_FEE_LIQUIDATION  
+  interestRules:
+    - balanceType: ORIGINAL_BALANCE        
+      description: Fixed Monthly Fee Base
+      interestComponent: FIXED_FEE_BASE    
+      liquidation:
+        model: BillUnconditional
+        postingCategories:
+          accrualPostingCategory: ACCRUEDFEENORMAL
+          billingPostingCategory: NORMALFEE
+          penaltyPostingCategory: PENALTYFEEBASE
+      postingCategory: NORMALFEEBASE
+  templateCode: us-credit

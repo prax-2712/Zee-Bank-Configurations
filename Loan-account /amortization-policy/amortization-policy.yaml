@@ -1,0 +1,30 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: EmeraldAmortizationPolicy
+metadata:
+  name: lsg.emerald.emeraldamortizationpolicy.8001
+spec:
+  metadata:
+    id: emerald.emeraldamortizationpolicy.8001
+    name: Bank Zee Premium US Emerald Amortization Policies
+    description: Bank Zee Premium US Emerald Amortization Policies
+    requester:
+      module: emerald-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  validFrom: '2010-04-01T00:00:00.000+05:30'
+  validTill: '2999-12-31T00:00:00.000+05:30'
+  name: US Fixed-Fee Amortization Policy
+  description: US Fixed-Fee BNPL Amortization Policy
+  code: EAPUS008001
+  epiMethod: FLAT_RATE                    
+  installmentFrequency: MONTHLY
+  paymentType: ARREARS
+  reAmortizationType: INSTALLMENT
+  brokenPeriodApplicable: true
+  reAmortizationMethod: WITHOUT_INTEREST_CAPITALISATION
+  roundingRule: NEAR
+  emiAmountRoundingRule: NEAR
+  repaymentScheduleType: EPI
+  autoReAmortizationAllowed: false         
+  templateCode: us-credit
