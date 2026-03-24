@@ -27,6 +27,7 @@ spec:
             - LateFeeBilled
             - OverlimitFeeBilled
             - CashAdvanceFeeBilled
+            - JoiningFeeBilled
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -54,6 +55,7 @@ spec:
             - LateFeeBilled
             - OverlimitFeeBilled
             - CashAdvanceFeeBilled
+            - JoiningFeeBilled
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -64,6 +66,7 @@ spec:
             - LateFeeUnbilled
             - OverlimitFeeUnbilled
             - CashAdvanceFeeUnbilled
+            - JoiningFeeUnbilled
             - AnnualFeeUnbilled
             - CashInterestUnbilled
             - EMIInterestUnbilled
@@ -79,6 +82,7 @@ spec:
             - LateFeeBilled
             - OverlimitFeeBilled
             - CashAdvanceFeeBilled
+            - JoiningFeeBilled
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -89,6 +93,7 @@ spec:
             - LateFeeUnbilled
             - OverlimitFeeUnbilled
             - CashAdvanceFeeUnbilled
+            - JoiningFeeUnbilled
             - AnnualFeeUnbilled
             - CashInterestUnbilled
             - EMIInterestUnbilled
@@ -106,6 +111,8 @@ spec:
             - LateFeeBilled
             - OverlimitFeeBilled
             - CashAdvanceFeeBilled
+            - JoiningFeeBilled
+            - JoiningFee
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -116,6 +123,7 @@ spec:
             - LateFeeUnbilled
             - OverlimitFeeUnbilled
             - CashAdvanceFeeUnbilled
+            - JoiningFeeUnbilled
             - AnnualFeeUnbilled
             - CashInterestUnbilled
             - EMIInterestUnbilled
@@ -128,9 +136,10 @@ spec:
           - '*'
         repaymentSequenceTieBreaker: FIFO
         settlementPriority:
-          - LateFeeBille
-          - OverlimitFeeBille
-          - CashAdvanceFeeBill
+          - LateFeeBilled
+          - OverlimitFeeBilled
+          - CashAdvanceFeeBilled
+          - JoiningFeeBilled
           - AnnualFeeBilled
           - CashInterestBilled
           - EMIInterestBilled
@@ -138,10 +147,10 @@ spec:
           - CashPrincipalBilled
           - EMIPrincipalBilled
           - RetailPrincipalBilled
-          - LateFeeUnbille
-          - OverlimitFeeUnbille
+          - LateFeeUnbilled
+          - OverlimitFeeUnbilled
           - CashAdvanceFeeUnbilled
-          - RetailMiscFeeUnbille
+          - JoiningFeeUnbilled
           - AnnualFeeUnbilled
           - CashInterestUnbilled
           - EMIInterestUnbilled
@@ -157,8 +166,9 @@ spec:
           - EMIPrincipalBilled
           - RetailPrincipalBilled
           - LateFeeBille
-          - OverlimitFeeBille
-          - CashAdvanceFeeBill
+          - OverlimitFeeBilled
+          - CashAdvanceFeeBilled
+          - JoiningFeeBilled
           - AnnualFeeBilled
           - CashInterestBilled
           - EMIInterestBilled
@@ -166,10 +176,11 @@ spec:
           - CashPrincipalUnbilled
           - EMIPrincipalUnbilled
           - RetailPrincipalUnbilled
-          - LateFeeUnbille
-          - OverlimitFeeUnbille
+          - LateFeeUnbilled
+          - OverlimitFeeUnbilled
           - CashAdvanceFeeUnbilled
-          - RetailMiscFeeUnbille
+          - JoiningFeeUnbilled
+          - RetailMiscFeeUnbilled
           - AnnualFeeUnbilled
           - CashInterestUnbilled
           - EMIInterestUnbilled
