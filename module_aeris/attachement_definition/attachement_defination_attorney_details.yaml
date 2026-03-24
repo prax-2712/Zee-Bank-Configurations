@@ -1,0 +1,87 @@
+kind: AttachmentDefinition
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.aries.attachmentdefinition.premium-poa-us
+  namespace: aries
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.lsg","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.lsg.git","filePath":"module_configurations/module_aries/attachment-definitions/attachment-definition_attorney-details.yaml","tenantCode":"lsg"}'
+spec:
+  metadata:
+    id: aries.attachmentdefinition.bz_us_premium_poa
+    name: Bank ZEE US Premium POA Definition
+    description: Fiduciary and legal authorization schema for US Affluent Cardholders.
+    tenantId: '802156'
+    tenantCode: zee
+    requester:
+      module: aries 
+      moduleVersion: 0.0.1
+  # Unique code for the Premium POA type
+  code: BZ_US_POA_ATTR_001
+  attachmentType: ATTORNEY_DETAILS
+  description: Mandatory attachment for verified legal representation.
+  schaasSchema: |-
+    {
+      "type": "object",
+      "properties": {
+        "attachmentType": { "const": "ATTORNEY_DETAILS" },
+        "attachmentData": {
+          "type": "object",
+          "title": "US Affluent POA Schema",
+          "description": "Secure storage of fiduciary details per US CLM compliance",
+          "properties": {
+            # --- Personal Identity ---
+            "firstName": { "type": "string", "maxLength": 25, "pattern": "^[A-Za-z\\- ]+$" },
+            "lastName": { "type": "string", "maxLength": 25, "pattern": "^[A-Za-z\\- ]+$" },
+            
+            # --- Professional Credentials (US Bar) ---
+            "barRegistrationNumber": { 
+              "type": "string", 
+              "description": "Mandatory for verifying legal standing in US jurisdictions" 
+            },
+            "barStateOfLicensure": {
+              "type": "string",
+              "enum": ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", 
+              "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", 
+              "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", 
+              "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", 
+              "VA", "WA", "WV", "WI", "WY"]
+            },
+
+            # --- Legal Scope & Fiduciary Status ---
+            "scopeOfAuthorization": {
+              "type": "string",
+              "enum": ["Full", "Limited", "Durable", "Springing"],
+              "description": "Critical for determining which card actions the attorney can perform"
+            },
+            "notarizationStatus": { 
+              "type": "boolean", 
+              "description": "Ensures the POA document is legally enforceable in the US" 
+            },
+
+            # --- Geographic Location (US Standards) ---
+            "city": { "type": "string", "maxLength": 20 },
+            "state": {
+              "type": "string",
+              "enum": ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", 
+              "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", 
+              "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
+              "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", 
+              "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
+            },
+            "postCode": { "type": "string", "pattern": "^\\d{5}([0-9]{4})?$" },
+            "country": { "const": "US" },
+
+            # --- Contact & Law Firm Data ---
+            "phone": { "type": "string", "pattern": "^\\+[1-9]\\d{10,14}$" },
+            "email": { "type": "string", "format": "email" },
+            "firmName": { "type": "string", "description": "Associated US Law Firm name" }
+          },
+          "required": [
+            "firstName", "lastName", "barRegistrationNumber", "scopeOfAuthorization", 
+            "notarizationStatus", "state", "postCode", "country", "phone", "email"
+          ]
+        }
+      }
+    }

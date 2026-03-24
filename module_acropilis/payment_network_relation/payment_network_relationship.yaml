@@ -1,0 +1,53 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: PaymentNetworkRelationship
+metadata:
+  name: zee.athena.paymentnetworkrelationship.bz_us_mc_premium
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  namespace: athena
+spec:
+  metadata:
+    id: athena.paymentnetworkrelationship.bz_us_mc_premium
+    name: Bank Zee US Mastercard Premium Relationship
+    description: Production gateway for World Elite Mastercard credit processing.
+    tenantCode: zee
+    tenantId: '802156'
+  attributes:
+    # High-tier attributes for affluent spend monitoring
+    additionalProperties: '{"tier": "WORLD_ELITE", "region": "USA"}'
+  code: BZ_US_MC_REL_001
+  name: Bank Zee Mastercard Gateway
+  
+  # Links to the specific Mastercard Network Provider code
+  paymentNetworkCode: MASTERCARD_US_PROV
+  description: High-availability connection for US Affluent Card Processing
+
+  # Connection and Routing Configuration
+  paymentNetworkRelationshipConfigs: |
+    [
+      {
+        "configId": "bz-mc-premium-config-001",
+        "connectionConfig": {
+          "host": "10.50.20.10", 
+          "port": "443",
+          "mode": "CLIENT",
+          "encoding": "EBCDIC", 
+          "groupSignonId": "BZ_US_PROD",
+          "customerId": "BZ_CUST_802156",
+          "ica": "17051", 
+          "networkManagementInformationCode": "001",
+          "mipId": 102,
+          "maxSessions": 10,
+          "tlsEnabled": true,   # PCI-DSS and federal regulations (like the GLBA) require that the connection between the bank and the network be encrypted
+          "connectionRetryDelayInSeconds": "5"
+        },
+        "routingConfig": {
+          "processingHost": "https://gwathena.us-east.zetaapps.in/proteus/zee/mastercard-iso/1.0",
+          "routeType": "OUTGOING_TO_CARDNETWORK",
+          "routes": []
+        }
+      }
+    ]
+
+  status: INACTIVE
+  

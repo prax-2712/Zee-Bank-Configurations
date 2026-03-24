@@ -1,0 +1,78 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.aries.configuration.module.kyc.premium.kyc-transformer
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.lsg","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.lsg.git","filePath":"module_configurations/module_aries/ah-transformer/ah-transformer_ah-transformer-kyc-hdfcscheme.yaml","tenantCode":"lsg"}'
+spec:
+  metadata:
+    id: aries.configuration.module.kyc.premium.kyc-transformer
+    name: Bank ZEE Premium US KYC Transformer
+    description: Logic to determine effective KYC status based on US verification priority.
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"function":{"arguments":{"items":{"name":{"type":"string"},"value":"string"},"type":"array"},"chainSequenceNum":{"type":"integer"},"extensionPointID":{"type":"string"},"scheme":{"type":"string"},"functionName":{"type":"string"},"state":{"type":"string"}},"objectType":{"type":"string"},"sandboxCode":{"type":"string"},"sandboxRole":{"type":"string"},"script":{"content":{"type":"string"},"format":{"type":"string"},"type":{"type":"string"}}}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      chainSequenceNum: 1
+      extensionPointID: kycRuleFunctionTransformer
+      scheme: BZ_US_PREMIUM_SCHEME
+      function:
+        arguments:
+          - name: object
+            value: $object
+        functionName: kycRuleFunction
+      objectType: account-holder
+      sandboxCode: BZ_US_PREMIUM_SB
+      script:
+        content: |
+          function kycRuleFunction(a) {
+            // US Priority Map: Lower number = Higher Legal Weight
+            var priorityMap = {
+              "Full_KYC-SSN_PHYSICAL": 1,      // Highest: Physical SSN card verified
+              "Full_KYC-PASSPORT_VERIFIED": 2, // Certified Passport check [cite: 140]
+              "Full_KYC-STATE_ID_DL": 3,       // State Driver's License [cite: 138]
+              "Min_KYC-SSN_E_VERIFY": 4,       // Automated SSN match
+              "Min_KYC-SOFT_CREDIT_PULL": 5,   // Identity verified via Credit Bureau
+              "No_KYC": 6
+            },
+            now = new Date(),
+            // Extract tags related to KYC status [cite: 37, 50, 139]
+            kycTags = a.tags.filter(function(tag) { 
+              return tag.type === 'KYC-INFO'; 
+            }),
+            // Filter out expired documents per US Bank policy 
+            filteredTags = kycTags.filter(function(tag) {
+              if (!tag.attributes || !tag.attributes.expiry) return false;
+              var expiryDate = new Date(tag.attributes.expiry);
+              return expiryDate > now;
+            });
+
+            // Sort by priority (1 is best)
+            filteredTags.sort(function(a, b) {
+              var priorityA = priorityMap[a.value] || 99;
+              var priorityB = priorityMap[b.value] || 99;
+              return priorityA - priorityB;
+            });
+
+            if (filteredTags == null || filteredTags.length == 0) return null;
+            
+            // Return the highest-priority valid KYC status
+            return filteredTags[0];
+          }
+        format: JS
+        type: INLINE
+      state: ENABLED
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.aries.ah-transformer
+    displayName: Bank ZEE Premium KYC Transformer

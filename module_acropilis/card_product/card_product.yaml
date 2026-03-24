@@ -1,0 +1,52 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  # Naming: tenant.module.product.identifier
+  name: zee.acropolis-pci.configuration.product.bz_black_infinite.card-hub-product
+  labels:
+    module: acropolis-pci
+    rrsd.zetaapps.in/day: day-one
+  namespace: acropolis-pci
+spec:
+  metadata:
+    id: acropolis-pci.configuration.product.bz_black_infinite.card-hub-product
+    name: Bank Zee Black Infinite Card Hub
+    description: Card Hub management for premium US Mastercard World Elite product.
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      # --- 1. Product Identification ---
+      code: BZ_MC_WORLD_ELITE
+      name: Bank Zee Black Infinite
+      description: Premium management hub for US affluent credit lines.
+
+      # --- 2. US Authorized User (Secondary Card) Invite Config ---
+      # Complies with US Equal Credit Opportunity Act (ECOA) standards.
+      inviteConfig:
+        allowedCommunicationModes:
+          - EMAIL
+          - SMS # US standard for instant "Invite to App"
+        
+        # Defining legal US relationship types for credit responsibility
+        allowedRelationshipTypes:
+          - SPOUSE
+          - CHILD
+          - DOMESTIC_PARTNER # Required for modern US inclusive banking
+          - PARENT
+          - AUTHORIZED_USER # Generic for non-family business/personal assistants
+          
+        # US Bank Security Standards
+        inviteExpiryInHours: 48 # Extended to 48hrs to allow for US weekend processing
+        maxInvites: 5 # Limited for premium risk control
+        maxPendingInvites: 2 # Prevents "Invite Spam" fraud
+        
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.acropolis.card-hub-product
+    displayName: Bank Zee Premium Card Hub

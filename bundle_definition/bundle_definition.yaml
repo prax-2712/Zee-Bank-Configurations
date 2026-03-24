@@ -1,0 +1,85 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.aether.configuration.product.bankzee.definition.bundle
+  labels:
+    rrsd.zetaapps.in/day: day-one
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.zee","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.zee.git","filePath":"/.defaults/product_configurations/provider_aether/tree/root/t0/product_configurations/product_PRDUS009979/provider_bundle/bundle_definition_BUNUS9979/bundle_definition.yaml","tenantCode":"zee"}'
+spec:
+  metadata:
+    id: aether.configuration.product.bankzee.definition.bundle
+    name: ' Bundle'
+    description: Bundle Defination 
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"additionalProperties":false,
+        "properties":{"associationCardinality":{"type":"string"},
+        "classificationFunction":{"type":"string"},
+        "classificationUnits":{"items":{"properties":{"attributes":{"type":"object"},
+        "code":{"type":"string"},"description":{"type":"string"},"icon":{"type":"string"},
+        "infoUri":{"type":"string"},"name":{"type":"string"},
+        "restrictedActionCodes":{"items":[{"type":"string"}],"type":"array"}},"required":["code","name","description","icon","infoUri","restrictedActionCodes"],"type":"object"},"type":"array"},"code":{"type":"string"},"icon":{"type":"string"},"infoUri":{"type":"string"},"isRuleBased":{"type":"boolean"},"modelType":{"type":"string"},"name":{"type":"string"},"objectType":{"type":"string"}},"required":["code","name","modelType","associationCardinality","objectType","isRuleBased","classificationFunction","icon","infoUri","classificationUnits"],"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      associationCardinality: Single
+      classificationFunction: ''
+      classificationUnits:
+        - code: ACTIVE
+          name: Premium Active
+        - attributes:
+            graceDays: 3
+            isPermanent: false
+            allowLoungeAccess: true
+            conciergeEnabled: true
+            ISSUE_INACTIVE_CARD: true # Card requires activation flow, which defines Card allocation Method
+            APPLY_SPEND_LIMITS: true # Automated activation trigger
+        - code: DELINQUENT_30
+          name: Soft Hold (30 DPD)
+          description: Restrict high-value perks and limit enhancements per Reg Z[cite: 23].
+          icon: https://icon.yuko
+          infoUri: https://info.com
+          restrictedActionCodes:
+            - CARD_CASH_PLACE_HOLD
+            - CARD_PURCHASE_PLACE_HOLD
+            - CARD_REPLACEMENT
+            - EMI_CONVERSION
+            - BILLING_CYCLE_UPDATE
+            - LIMIT_ENHANCEMENT
+      code: BZPCC_STATUS_MAP
+      description: Bundle  consists of an account product,funding account product and a credit card.
+      isRuleBased: false
+      modelType: Collection
+      name: Bundle defination for Bank Zee Premium 802156
+      objectType: in.zeta.aether.bundle
+      productMappings:
+        accountProduct:
+          productCode: BZ_PREM_ACC_001
+          productFamilyCode: RETAIL_CREDIT_AF # Standard US Retail Credit Family
+        paymentProduct:
+          productCode: BZ_PREM_PAY_001
+          productFamilyCode: VISA_USD_PAY_PF # Or MC_W_ELITE_PAY_PF
+        rewardProduct:
+          productCode: BZ_PREM_REWARD_001
+          productFamilyCode: ULT_REWARDS_RF
+        accountHolderProduct:
+          productCode: BZ_PREM_ACC_HOLDER_001
+          productFamilyCode: ACC_HOLDER_PF
+        notificationProduct:
+          productCode: BZ_PREM_NOTIF_001
+          productFamilyCode: NOTIFICATION_PF
+      shortCode: BUNUS05933
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.aether.bundle.defination
+    displayName: ' Bank Zee Premium Bundle Definition View'

@@ -1,0 +1,79 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  # Naming: tenant.module.product.identifier
+  name: zee.acropolis-pci.configuration.product.bz_platinum_us.card-sku
+  labels:
+    module: acropolis-pci
+    rrsd.zetaapps.in/day: day-one
+  namespace: acropolis-pci
+spec:
+  metadata:
+    id: acropolis-pci.configuration.product.bz_platinum_us.card-sku
+    name: Bank Zee US Platinum Metal SKU
+    description: Physical SKU for 18g Metal Mastercard World Elite for US customers.
+    requester:
+      module: acropolis-pci
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      # --- 1. SKU Identification ---
+      code: BZ_PLAT_MET_US_01
+      productCode: BZ_BLACK_INFINITE # Links to your Aether Product Code
+      batchCode: BZ_US_DAILY_DISPATCH_1800 # Batching for US FedEx cutoff times
+      
+      attributes:
+        dependentOnPrimary: false # Allows premium users to have standalone secondary cards
+      
+      # --- 2. US Inventory & Reservoir Management ---
+      # Crucial for managing expensive 18g Metal card stock levels.
+      reservoirConfig:
+        inventory.size: 10000 
+        refilling.rate: 1000 # Low rate alerts for high-cost metal blanks
+      
+      # --- 3. Physical & Expiry Logic (US Standards) ---
+      overridableConfigs:
+        cardType: PHYSICAL
+        # Setting a standard 5-year expiry window for US Credit cards
+        expiry:
+          year: 5
+          month: 0
+          day: 0
+        binRanges:
+          - bin: '520011'
+            range: '01' # Matches your Physical Metal Bin Range
+            status: ENABLED
+      
+      # --- 4. Fulfillment & Printing Links ---
+      plasticCode: METAL_BLACK_18G # Must match the Vendor's supported plastic codes
+      fileAttributes:
+        bankIdentifier: BANK_ZEE_USA
+      
+      # High-speed grouping for US Personalization Bureaus
+      fileGroupingConfig:
+        fileGroupingTemplate:
+          format: 'BZ_DISPATCH_%s_%s'
+          header: SKU_ID,VENDOR_ID
+      
+      # --- 5. Trusted Vendor Selection ---
+      vendorIDs:
+        - IDEMIA_US_BUREAU # Your US-based premium printer
+      
+      # --- 6. US Vector & Compliance Tags ---
+      vectors:
+        formFactorProductCode: BZ_US_PLAT_METAL_FF
+      tags:
+        - tagType: VBO
+          tagValue: BZ_US_AFFLUENT_VBO_01 # Used for VIP segment reporting
+          
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.acropolis.card-sku
+    displayName: Bank Zee US Platinum SKU

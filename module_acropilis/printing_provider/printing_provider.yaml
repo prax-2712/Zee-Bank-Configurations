@@ -1,0 +1,39 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  # Naming: tenant.module.resource.identifier
+  name: zee.acropolis-pci.configuration.module.idemia_us.printing-provider
+  labels:
+    module: acropolis-pci
+    rrsd.zetaapps.in/day: day-zero
+  namespace: acropolis-pci
+spec:
+  metadata:
+    id: acropolis-pci.configuration.module.idemia_us.printing-provider
+    name: Bank Zee US Printing Provider
+    description: High-security personalization provider for US Metal Cards.
+    requester:
+      module: acropolis-pci
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      name: IDEMIA_US_BUREAU  # US vendor 
+      description: Bank Zee US Premium Personalization Bureau
+      encryptionConfig:
+        enabled: true
+        # PGP Public Key used to encrypt the P3/NEXO files before sending to the bureau
+        publicKeyPath: /user-service-key/BZ_US_PREMIUM_EMBOSSING_PUBLIC_KEY
+      fileExchangeConfig:
+        # Secure directory where Acropolis drops the card data files
+        path: bz-us-production/dispatch-outbound/metal-range
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.acropolis.printing-provider
+    displayName: Bank Zee US Printing Provider

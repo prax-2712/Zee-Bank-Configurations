@@ -1,0 +1,27 @@
+kind: BundleStatusPolicy
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.aether.bundlestatuspolicy.1001
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.zee","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.zee.git","filePath":"module_configurations/module_aether/BundleStatusPolicy/bundle-status-policy_1001.yaml","tenantCode":"zee"}'
+spec:
+  metadata:
+    id: aether.bundlestatuspolicy.bankzee-premium-affluent
+    name: Bank Zee Premium Bundle Status Policy
+    description: Master lifecycle policy for US Affluent Credit products 
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantId: "802156"
+    tenantCode: zee
+  code: BZ_US_PREMIUM_LIFECYCLE_POLICY
+  name: Bank Zee Premium Lifecycle Policy
+  description: Handles US-specific lifecycle states including SCRA, Bankruptcy, and VIP
+  bundleStatusModels:
+    - modelCode: manualBundleStatus # Manual Model: For Ops-driven statuses like 'Deceased' or 'Fraud Block'
+    - modelCode: autoBundleStatus   # Auto Model: For DPD-based delinquency and system-driven closures
+    - modelCode: regularComplianceBundleStatus     # Regulatory Model: Specifically for SCRA and OFAC compliance, KYC Expiry, SCRA Protections, OFAC Checks.
+  viewConfig:
+    displayName: Bundle Status Policy 1001

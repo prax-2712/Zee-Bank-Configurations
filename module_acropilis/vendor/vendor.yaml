@@ -1,0 +1,63 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  # Naming: tenant.module.resource.identifier
+  name: zee.acropolis-pci.configuration.module.bz_premium_001.vendor
+  labels:
+    module: acropolis-pci
+    rrsd.zetaapps.in/day: day-zero
+  namespace: acropolis-pci
+spec:
+  metadata:
+    id: acropolis-pci.configuration.module.bz_premium_001.vendor
+    name: Bank Zee US Premium Vendor
+    description: Vendor configuration for Idemia US Bureau - Metal Card Personalization
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      # --- 1. Product Capabilities ---
+      # Affluent cards MUST support all three for US merchant compatibility.
+      cardFeaturesSupported:
+        - MAG_STRIPE
+        - EMV
+        - NFC
+      
+      # --- 2. US Compliance Notification ---
+      # Real-time alerts for the Bank Zee ops team when PII files are exchanged.
+      emailNotificationConfig:
+        notifySftpUploadEmailMessage: "CONFIDENTIAL: Bank Zee Premium Personalization File (P3) has been securely uploaded to IDEMIA US."
+        notifySftpUploadEmailRecipients:
+          - card-ops@bankzee.com
+          - security-audit@bankzee.com
+        notifySftpUploadEmailSubject: "BANK ZEE: SFTP Upload Notification - Premium Segment"
+        notifySftpUploadIsEnabled: true
+
+      # --- 3. The Embossing Instruction (The 'NEXO' Format) ---
+      # This base64 contains the layout for Laser Engraving and Chip Encoding.
+      # It includes fields for 'Member Since', 'World Elite Logo', and 'Priority Shipping'.
+      embossingFileFormatBase64: ewogICAgImZpbGVUeXBlIjogIkVNQk9TU0lORyIsCiAgICAicm93IjogewogICAgICAgICJoZWFkZXIiOiAic2VyaWFsTm8sY2huLGVtYm9zc2luZ05hbWUsZXhwaXJ5RGF0ZSxzZXJ2aWNlQ29kZSxjdnYxLHB2ZCxhZGRMaW5lMSxhZGRDaXR5LGFkZFN0YXRlLGFkZFBpbkNvZGUsZGVsaXZlcnlQcmlvcml0eSxtZW1iZXJTaW5jZSxwbGFzdGljQ29kZSIsCiAgICAgICAgImZvcm1hdCI6ICIlMDZkfCUuMTZzfCUuMjdzfCU0NHN8MDAwfCUuM3N8JS41c3wlLjMwU3wlLjMwU3wlLjJzfCUuMTBTfEVYUEVESVRFRHwlLjRzfE1FVEFMX0JMQUNLXzE4RyIKICAgIH0KfQ==
+
+      # --- 4. Vendor Selection Logic ---
+      # Ensures only this vendor is used if the card SKU is 'METAL_BLACK'
+      vendorSelectionFunctionBase64: ZnVuY3Rpb24gc2VsZWN0VmVuZG9yKGNhcmRTS1UsIG9yZGVyU3VtbWFyeSwgY2FyZFJlcXVlc3QpIHsKICByZXR1cm4gKGNhcmRTS1UgPT09ICdNRVRBTF9CTEFDS18xOEcnKSA/ICdQQVNTJyA6ICdGQUlMJzsKfQ==
+
+      # --- 5. US Security & Key Management ---
+      keyConfig:
+        # ZMK (Zone Master Key) used to securely share the PIN keys with the vendor.
+        zmkKeyId: BZ_US_IDEMIA_ZMK_001
+      
+      mode: MAIL # Direct-to-consumer delivery
+      name: IDEMIA_US_PREMIUM
+      vendorCode: BZ_VEN_IDEMIA_US_01
+      
+      # --- 6. Extra US Regulatory Attributes ---
+      # Added to comply with US Card Act and Truth in Lending disclosure requirements.
+      additionalAttributes:
+        shippingMethod: "FEDEX_OVERNIGHT"
+        packageType: "PREMIUM_WELCOME_KIT"
+        insertRegulatoryNotice: "true" # Ensures 'Summary of Account Terms' is in the envelope.

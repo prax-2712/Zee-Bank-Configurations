@@ -1,0 +1,148 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.acropolis-pci.configuration.module.520011-02.bin-range
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.zeta-aws-use2-cprod-eks-01.cardworksuat","gitDbPath":"https://gitea.internal.us2.zetaapps.in/zetaengg/tenant_configuration.zeta-aws-use2-cprod-eks-01.cardworksuat.git","filePath":"/.defaults/module_configurations/module_acropolis-pci/tree/root/t0/module_configurations/module_acropolis-pci/bin_range/bin_range_532571-23.yaml","tenantCode":"cardworksuat"}'
+spec:
+  metadata:
+    id: acropolis-pci.configuration.module.520011-02.bin-range
+    name: Bank Zee Black Infinite Virtual Range
+    description: Virtual Card Range for 520011 (Digital Delivery)
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":{"acs":{"properties":{"avv1.keyid":{"type":"string"},"avv12.keyid":{"type":"string"},"is.enabled":{"type":"boolean"},"name":{"type":"string"}},"type":"object"},"bin":{"type":"string"},"code":{"type":"string"},"cardConfig":{"properties":{"association.fullCardDetails.allowed":{"type":"boolean"},"atcConfig":{"properties":{"actionResetFixedDelayHours":{"type":"string"},"actionResetPeriod":{"enum":["END_OF_DAY","HOURS"],"type":"string"},"isEnabledForOfflineTxns":{"type":"boolean"},"isEnabledForOnlineTxns":{"type":"boolean"},"threshold":{"type":"number"},"thresholdBreachAction":{"enum":["PERMANENT_BLOCK_CARD","TEMPORARY_BLOCK_CARD","NONE"],"type":"string"}},"type":"object"},"avv.validation.allowed":{"type":"string"},"backdate.transaction.allowed":{"type":"boolean"},"disallowedPatternsForPAN":{"items":{"type":"string"},"type":"array"},"dispatch.allowed":{"type":"boolean"},"incorrectPinConfig":{"properties":{"actionResetFixedDelayHours":{"type":"string"},"actionResetPeriod":{"enum":["END_OF_DAY","HOURS"],"type":"string"},"isEnabledForOfflineTxns":{"type":"boolean"},"isEnabledForOnlineTxns":{"type":"boolean"},"resetCounterOnActionReset":{"type":"boolean"},"threshold":{"type":"number"},"thresholdBreachAction":{"enum":["PERMANENT_BLOCK_CARD","TEMPORARY_BLOCK_CARD","NONE"],"type":"string"},"transactionsAllowedPostThresholdBreach":{"properties":{"domestic":{"items":{"enum":["CARD_PRESENT_WITH_PIN","CARD_PRESENT_WITHOUT_PIN","CARD_NOT_PRESENT"],"type":"string"},"type":"array"},"international":{"items":{"enum":["CARD_PRESENT_WITH_PIN","CARD_PRESENT_WITHOUT_PIN","CARD_NOT_PRESENT"],"type":"string"},"type":"array"}},"type":"object"}},"type":"object"},"maskedPanFormat":{"type":"string"},"maximum.allowed.contactless.amount":{"type":"string"},"offlinePin.verification.enabled":{"type":"boolean"},"stepUp.required":{"type":"boolean"},"tokenization.enabled":{"type":"boolean"}},"type":"object"},"cardType":{"enum":["PHYSICAL","VIRTUAL"],"type":"string"},"clearing":{"properties":{"credit.forUnmatchedMerchandiseReturn.isEnabled":{"type":"string"},"clearance.processor.v2.isEnabled":{"type":"string"},"credit.forUnmatchedRefund.isEnabled":{"type":"string"},"debit.adjustment.forUnmatchedAuth.isEnabled":{"type":"string"},"duplicate.credit.isEnabled":{"type":"string"},"duplicate.debit.isEnabled":{"type":"string"},"failed.credit.isEnabled":{"type":"string"},"failed.debit.isEnabled":{"type":"string"},"forced.debit.isEnabled":{"type":"string"},"late.presentment.credit.isEnabled":{"type":"string"},"late.presentment.debit.isEnabled":{"type":"string"},"merchandiseReturn.capture.isEnabled":{"type":"string"},"opsCentre.processDefinitionKey":{"type":"string"},"payment.capture.withUpdatedAmount.isEnabled":{"type":"string"},"refund.isEnabled":{"type":"string"},"refund.partial.isEnabled":{"type":"string"},"payment.capture.isEnabled":{"type":"string"},"refund.processor.v2.enabled":{"type":"string"},"tat.harmonisation.days":{"type":"number"}},"type":"object"},"features":{"items":{"enum":["EMV","MAG_STRIPE","NFC"],"type":"string"},"type":"array"},"iso":{"properties":{"ac.mk.keyId":{"type":"string"},"cvc3.keyId":{"type":"string"},"allowed.transaction.currency.list":{"type":"string"},"cardholder.billing.currency":{"type":"string"},"mastercard":{"properties":{"mastercard.memberID":{"type":"string"},"mastercard.pek.setup":{"type":"string"},"pos.zpk.keyid":{"type":"string"},"smc.mk.keyId":{"type":"string"},"smi.mk.keyId":{"type":"string"}},"type":"object"},"visa":{"properties":{"ac.mk.slotId":{"type":"string"},"pos.zpk.keyId":{"type":"string"},"pos.zpk.slotId":{"type":"string"}},"type":"object"}},"type":"object"},"keyConfig":{"properties":{"cavv.generation.mechanism":{"type":"string"},"cavv.slotId":{"type":"string"},"cavv1.keyAlgorithm":{"type":"string"},"cavv1.keyId":{"type":"string"},"cavv12.keyId":{"type":"string"},"cavv2.keyAlgorithm":{"type":"string"},"cavv2.keyId":{"type":"string"},"cvv.generation.mechanism":{"type":"string"},"cvv1.keyAlgorithm":{"type":"string"},"cvv1.keyId":{"type":"string"},"cvv1.service.code":{"type":"string"},"cvv1.slotId":{"type":"string"},"cvv12.keyAlgorithm":{"type":"string"},"cvv12.keyId":{"type":"string"},"cvv12.slotId":{"type":"string"},"cvv2.keyId":{"type":"string"},"cvv2.slotId":{"type":"string"},"offline.pin.crypto.keyId":{"type":"string"}},"type":"object"},"range":{"type":"string"}},"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+
+      bin: '520011'
+      range: '02' # Dedicated range for Virtual cards
+      code: BZ520011-02
+      cardType: VIRTUAL # Specified Type
+
+      acs:
+        is.enrollment.enabled: true # Critical for virtual cards to authenticate online spend
+        algorithm: HMACSHA256
+        iav.mk.keyid: BZ_US_KEY_ACS_VIRTUAL_02
+      attributes:
+        channel.code: CHNUSZZ1101
+        morpheusClientConfig:
+          url: https://api.internal.mum1-pp.zetaapps.in/zeta.in/morpheus/1.0/sendMessageV2
+          tokenKey: morpheus.sendMessage.llt
+        stip.isEnabled: 'true'
+      bin: '535998'
+      code: C535998-02
+      cardConfig:
+
+        dispatch.allowed: false
+        tokenization.enabled: true
+        stepUp.required: true
+        contactless.transaction.allowed: true
+        maximum.allowed.contactless.amount: '1000000'   # $10,000 equivalent for Affluent
+        backdate.transaction.allowed: false
+
+        asi.transaction.enabled: true
+        association.crn.allowed: true
+        cvv2.validation.allowed: OPTIONAL
+        association.fullCardDetails.allowed: true
+
+         # US Display Standard: 6-4-4 masking
+        maskedPanFormat: '[0-9]{6}xxxxxx[0-9]{4}'
+
+          # ATC ( Application Transaction Counter )
+        atcConfig:
+          actionResetFixedDelayHours: '24'
+          actionResetPeriod: HOURS
+          isEnabledForOfflineTxns: false
+          isEnabledForOnlineTxns: true
+          threshold: 5
+          thresholdBreachAction: TEMPORARY_BLOCK_CARD
+        disallowedPatternsForPAN:
+          - \d{8}9\d*
+        
+        incorrectPinConfig:
+          actionResetFixedDelayHours: '24'
+          actionResetPeriod: HOURS
+          isEnabledForOfflineTxns: false
+          isEnabledForOnlineTxns: true
+          resetCounterOnActionReset: false
+          threshold: 3
+          thresholdBreachAction: NONE
+          transactionsAllowedPostThresholdBreach:
+            domestic:
+              - CARD_PRESENT_WITHOUT_PIN
+              - CARD_NOT_PRESENT
+            international:
+              - CARD_PRESENT_WITHOUT_PIN
+              - CARD_NOT_PRESENT
+
+       
+        offlinePin.verification.enabled: false
+        
+        tokenization.enabled: true # customers can instantly add their virtual card to their iPhone or Android device. This allows them to use a "Virtual" card at physical Point-of-Sale (POS) terminals using NFC (contactless tap).
+
+
+      cardType: VIRTUAL
+      clearing:
+        opsCentre.bpdCode: RQDUSZZ0076
+        credit.forUnmatchedMerchandiseReturn.isEnabled: 'true'
+        credit.forUnmatchedRefund.isEnabled: 'true'
+        clearance.processor.v2.isEnabled: 'true'
+        clearingType: DMS # Dual Message System: Required for credit/refund logic
+        debit.isEnabled: 'false'
+        debit.blocked.mcc.list: ''
+        refund.partial.blocked.mcc.list: ''
+        debit.adjustment.forUnmatchedAuth.isEnabled: 'false'
+        duplicate.credit.isEnabled: 'false'
+        duplicate.debit.isEnabled: 'false'
+        failed.credit.isEnabled: 'false'
+        failed.debit.isEnabled: 'false'
+        forced.debit.isEnabled: 'true'
+        late.presentment.credit.isEnabled: 'true'
+        late.presentment.debit.isEnabled: 'true'
+        merchandiseReturn.capture.isEnabled: 'true'
+        opsCentre.processDefinitionKey: BZ_US_Digital_Clearing_Maker
+        payment.capture.withUpdatedAmount.isEnabled: 'true'
+        refund.isEnabled: 'true'
+        refund.partial.isEnabled: 'true'
+        refund.processor.v2.enabled: 'true'
+        tat.harmonisation.days: 3
+        payment.capture.isEnabled: 'true'
+        recurring.debit.adjustment.forUnmatchedAuth.isEnabled: 'true'
+        credit.forUnmatchedOCT.isEnabled: 'true'
+        financial.posting.isEnabled: 'true'
+      features:
+        - MAG_STRIPE
+        - EMV
+      iso:
+        ac.mk.keyid: KEYIN589851
+        cvc3.keyId: KEYIN589851
+        allowed.transaction.currency.list: "840,978,826"
+        cardholder.billing.currency: '840'
+        mastercard:
+          mastercard.memberID: 'BZ_US_17051'
+          mastercard.pek.setup: STATIC
+          pos.zpk.keyid: BZ_US_KEY_V_POS_02
+          smc.mk.keyid: KEYIN589861
+          smi.mk.keyid: KEYIN589867
+        
+        # As we are working with virtual card ( ECOM )
+      keyConfig:
+        cvv.generation.mechanism: USING_HSM
+        cvv2.service.code: '000'
+        cvv2.keyAlgorithm: 3DES
+        cvv2.keyId: KEYIN589876
+        
+        zmkKeyId: KEYIN589942
+      range: '02'
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.acropolis.bin-range
+    displayName: Bin 535998 Range 02

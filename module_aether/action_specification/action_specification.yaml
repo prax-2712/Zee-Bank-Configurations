@@ -1,0 +1,112 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.aether.configuration.module.acropolis.card-dispatch.action-specification
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.zee","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.zee.git","filePath":"/.defaults/module_configurations/module_aether/tree/root/t0/module_configurations/module_aether/action-specification/action-specification_default.yaml","tenantCode":"zee"}'
+spec:
+  metadata:
+    id: aether.configuration.module.acropolis.card-dispatch.action-specification
+    name: Bank Zee Premium Card Dispatch Action Specification
+    description: Premium dispatch configuration for metal card fulfillment and expedited US delivery.
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":
+        {"artefactProvider":{"description":"It represents the artefactProvider of the above action.","type":"string"},"artefactType":{"description":"It represents the type of the artefact on which action is going to be performed.","type":"string"},
+          "description":{"description":"It can contain any relevant information describing the action.","type":"string"},
+          "extensionPoint":{"description":"It represents the extension-point to be executed as part of this action.",
+          "properties":{"extensionArguments":{"description":"A list of arguments expected by this extension point",
+          "items":{"properties":{"objectName":{"description":"Name of the argument","type":"string"},
+          "sampleObject":{"description":"A sample object illustrating how a real object looks like","type":"object"},"schemaFormat":{"description":"Format of the schema to validate against","enum":["JSON"],"type":"string"},"schemaReference":{"description":"Schema for this argument","type":"string"}},"required":["objectName","sampleObject","schemaFormat","schemaReference"],"type":"object"},"type":"array"},"extensionReturnObject":{"description":" The value to be returned after an extension is executed","properties":{"objectName":{"description":"Name of the argument","type":"string"},"sampleObject":{"description":"A sample object illustrating how a real object looks like","type":"object"},"schemaFormat":{"description":"Format of the schema to validate against","enum":["JSON"],"type":"string"},"schemaReference":{"description":"Schema for this argument","type":"string"}},"required":["objectName","sampleObject","schemaFormat","schemaReference"],"type":"object"},"metaData":{"description":"Delta embedded data file description","properties":{"description":{"type":"string"},"labels":{"items":{"type":"string"},"type":"array"},"name":{"type":"string"},"tags":{"items":{"type":"string"},"type":"array"},"visibility":{"items":{"type":"string"},"type":"array"}},"required":["description","name"],"type":"object"},"state":{"description":"ENABLED/DISABLED","enum":["ENABLED","DISABLED"],"type":"string"},"supportedExtensionTypes":{"description":"A list of supported extension types for this extension point.","items":{"enum":["TRANSFORMER"],"type":"string"},"type":"array"},"transformers":{"description":null,"items":{"properties":{"chainSequenceNum":{"description":"Denotes the priority of the transformer in the chain. Lower the value, higher the priority.","format":"int64","type":"integer"},"function":{"description":"Function that denotes the entry point of this transformer","properties":{"arguments":{"description":"Arguments to be passed to this transformer","items":{"properties":{"name":{"description":"Name of the argument","type":"string"},"value":{"description":"Value of the argument: static or dynamic","type":"string"}},"required":["name","value"],"type":"object"},"type":"array"},"name":{"description":"Name of the function","type":"string"}},"required":["arguments","name"],"type":"object"},"metaData":{"description":"Delta embedded data file description","properties":{"description":{"type":"string"},"labels":{"items":{"type":"string"},"type":"array"},"name":{"type":"string"},"tags":{"items":{"type":"string"},"type":"array"},"visibility":{"items":{"type":"string"},"type":"array"}},"required":["description","name"],"type":"object"},"script":{"description":"Script to execute for this transformer","properties":{"content":{"description":"Content of the transformer script. Could be the actual script or a reference to the script","type":"string"},"format":{"description":"Language/format in which the script is written","enum":["JS"],"type":"string"},"type":{"description":"Type denotes the location of the transformer script","enum":["INLINE","REFERENCE"],"type":"string"}},"required":["content","format","type"],"type":"object"},"state":{"description":"ENABLED/DISABLED","enum":["ENABLED","DISABLED"],"type":"string"}},"required":["state","chainSequenceNum","function","script"],"type":"object"},"type":"array"}},"required":["extensionArguments","extensionReturnObject","state","supportedExtensionTypes","transformers"],"type":"object"},"name":{"description":"It represents the name of the action.","type":"string"},"slug":{"description":"It represents the slug for the above action.","type":"string"},"tenantID":{"description":"Tenant to which this extension point belongs to","format":"int64","type":"integer"}},"required":["name","tenantID","slug","artefactType","artefactProvider"],"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      artefactProvider: ACROPOLIS
+      artefactType: CARD
+      description: Dispatch a physical card
+      extensionPoint:
+        extensionArguments:
+          - objectName: $requestArgs
+            sampleObject:
+              requestPayload:
+                additionalAttributes:
+                  cashlimit: '$10000'
+                  creditlimit: '$100000'
+                  productName: Bank Zee Black Infinite
+                  trackingId: BZ-US-EXP-77821
+                deliveryAddressPinCode: 92686
+                deliveryAddress:
+                  addressLine1: 308 Herbert Mountain
+                  addressLine2: Suite 1200
+                  addressLine3: Park Palace
+                  city: West Herminialand
+                  contactNumber: 18005550199
+                  country: United States
+                  name: John Doe
+                  state: California
+                fourthLineEmbossing: BANK ZEE ELITE
+                plasticCode: METAL_BLACK_18G
+                tenantAttributes: {}
+                thirdLineEmbossing: John Doe
+                vendorAttributes: {}
+              token: BZ_Auth_2026_Secure
+            schemaFormat: JSON
+            schemaReference: sch-aas://cardDispatchRequestArgs
+        extensionReturnObject:
+          objectName: cardDispatchApiRequest
+          sampleObject:
+            additionalAttributes:
+              cashlimit: '$10000'
+              creditlimit: '$100000'
+              productName: Bank Zee Black Infinite
+              
+            deliveryAddress:
+              addressLine1: 308 Herbert Mountain
+              addressLine2: Suite 1200
+              addressLine3: Park Palace
+              city: West Herminialand
+              contactNumber: 18005550199
+              country: United States
+              name: John Doe
+              state: California
+            deliveryAddressPinCode: 92686
+            fourthLineEmbossing: ABCD Enterprises
+            plasticCode: WHITEC
+            tenantAttributes: {}
+            thirdLineEmbossing: John Doe
+            vendorAttributes: {}
+          schemaFormat: JSON
+          schemaReference: sch-aas://cardDispatchExtensionReturnObject
+        state: ENABLED
+        supportedExtensionTypes:
+          - TRANSFORMER
+        transformers:
+          - chainSequenceNuma: 1
+            function:
+              arguments:
+                - name: requestArgs
+                  value: $requestArgs
+              name: validateAndEnrichPremiumDispatch
+            script:
+              content: "function validateAndEnrichPremiumDispatch(requestArgs) { var requiredFields = ['deliveryAddress', 'plasticCode']; var areAllFieldsPresent = requiredFields.every(function(field) { return requestArgs.hasOwnProperty(field); }); if (areAllFieldsPresent) { return { 'plasticCode': 'METAL_BLACK_18G', 'thirdLineEmbossing': requestArgs.deliveryAddress.name, 'deliveryAddress': requestArgs.deliveryAddress, 'additionalAttributes': { 'cashLimit': '10000', 'creditLimit': '100000', 'shippingPriority': 'HIGH' } }; } return JSON.parse(httpRequest({'method': 'GET', 'url': 'https://api.bankzee.com/enrich-dispatch', 'headers': [{'name': 'X-Zeta-AuthToken', 'value': requestArgs.token}]}).content.text); }"
+              format: JS
+              type: INLINE
+            state: ENABLED
+      name: Card Dispatch
+      slug: dispatchCard
+      tenantID: '802156'
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.aether.action-specification
+    displayName: Bank Zee Premium Card Dispatch Configuration

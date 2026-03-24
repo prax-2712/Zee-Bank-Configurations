@@ -1,0 +1,37 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.acropolis-pci.configuration.module.520011.bin
+spec:
+  metadata:
+    id: acropolis-pci.configuration.module.520011.bin
+    name: Bank Zee US Premium Bin
+    description: Mastercard BIN for Bank Zee US Affluent Credit Line
+    tenantId: '802156'
+    tenantCode: zee
+  config: 
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":{"bin":{"type":"string"},"code":{"type":"string"},"binLength":{"type":"number"},"cardNetwork":{"enum":["VISA","MASTERCARD"],"type":"string"},"clearingType":{"enum":["SMS","DMS"],"type":"string"},"panLength":{"type":"number"},"rangeLength":{"type":"number"},"sponsorBank":{"type":"string"}},"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      attributes:
+        bin.type: CREDIT
+        bin.countryCode: USA # Matches US Genesis and CLM requirements
+        bin.category: WORLD_ELITE # Mastercard tier for affluent customers with benifits like "Unlimited Priority Pass" and "Concierge" + lounge access
+      bin: '520011' # Example US Mastercard Bin (5 series)
+      code: BZ520011
+      binLength: 6
+      cardNetwork: MASTERCARD
+      clearingType: DMS # Dual Message System: Required for credit/refund logic
+      panLength: 16
+      rangeLength: 2
+      sponsorBank: Bank ZEE USA # Matches your US Genesis identity
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.acropolis.bin
+    displayName: Bank Zee US Premium Bin 520011
