@@ -25,12 +25,8 @@ spec:
           repaymentSequenceTieBreaker: FIFO
           settlementPriority:
             - LateFeeBilled
-            - InsufficientFundFeeBilled
             - OverlimitFeeBilled
-            - CollectionFeeBilled
             - CashAdvanceFeeBilled
-            - RetailMiscFeeBilled
-            - RetailServiceFeeBilled
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -39,12 +35,8 @@ spec:
             - EMIPrincipalBilled
             - RetailPrincipalBilled
             - LateFeeUnbilled
-            - InsufficientFundFeeUnbilled
             - OverlimitFeeUnbilled
-            - CollectionFeeUnbilled
             - CashAdvanceFeeUnbilled
-            - RetailMiscFeeUnbilled
-            - RetailServiceFeeUnbilled
             - AnnualFeeUnbilled
             - CashInterestUnbilled
             - EMIInterestUnbilled
@@ -60,12 +52,8 @@ spec:
             - EMIPrincipalBilled
             - RetailPrincipalBilled
             - LateFeeBilled
-            - InsufficientFundFeeBilled
             - OverlimitFeeBilled
-            - CollectionFeeBilled
             - CashAdvanceFeeBilled
-            - RetailMiscFeeBilled
-            - RetailServiceFeeBilled
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -74,12 +62,8 @@ spec:
             - EMIPrincipalUnbilled
             - RetailPrincipalUnbilled
             - LateFeeUnbilled
-            - InsufficientFundFeeUnbilled
             - OverlimitFeeUnbilled
-            - CollectionFeeUnbilled
             - CashAdvanceFeeUnbilled
-            - RetailMiscFeeUnbilled
-            - RetailServiceFeeUnbilled
             - AnnualFeeUnbilled
             - CashInterestUnbilled
             - EMIInterestUnbilled
@@ -93,12 +77,8 @@ spec:
           repaymentSequenceTieBreaker: FIFO
           settlementPriority:
             - LateFeeBilled
-            - InsufficientFundFeeBilled
             - OverlimitFeeBilled
-            - CollectionFeeBilled
             - CashAdvanceFeeBilled
-            - RetailMiscFeeBilled
-            - RetailServiceFeeBilled
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -107,12 +87,8 @@ spec:
             - EMIPrincipalBilled
             - RetailPrincipalBilled
             - LateFeeUnbilled
-            - InsufficientFundFeeUnbilled
             - OverlimitFeeUnbilled
-            - CollectionFeeUnbilled
             - CashAdvanceFeeUnbilled
-            - RetailMiscFeeUnbilled
-            - RetailServiceFeeUnbilled
             - AnnualFeeUnbilled
             - CashInterestUnbilled
             - EMIInterestUnbilled
@@ -128,12 +104,8 @@ spec:
             - EMIPrincipalBilled
             - RetailPrincipalBilled
             - LateFeeBilled
-            - InsufficientFundFeeBilled
             - OverlimitFeeBilled
-            - CollectionFeeBilled
             - CashAdvanceFeeBilled
-            - RetailMiscFeeBilled
-            - RetailServiceFeeBilled
             - AnnualFeeBilled
             - CashInterestBilled
             - EMIInterestBilled
@@ -142,12 +114,8 @@ spec:
             - EMIPrincipalUnbilled
             - RetailPrincipalUnbilled
             - LateFeeUnbilled
-            - InsufficientFundFeeUnbilled
             - OverlimitFeeUnbilled
-            - CollectionFeeUnbilled
             - CashAdvanceFeeUnbilled
-            - RetailMiscFeeUnbilled
-            - RetailServiceFeeUnbilled
             - AnnualFeeUnbilled
             - CashInterestUnbilled
             - EMIInterestUnbilled
@@ -160,13 +128,9 @@ spec:
           - '*'
         repaymentSequenceTieBreaker: FIFO
         settlementPriority:
-          - LateFeeBilled
-          - InsufficientFundFeeBilled
-          - OverlimitFeeBilled
-          - CollectionFeeBilled
-          - CashAdvanceFeeBilled
-          - RetailMiscFeeBilled
-          - RetailServiceFeeBilled
+          - LateFeeBille
+          - OverlimitFeeBille
+          - CashAdvanceFeeBill
           - AnnualFeeBilled
           - CashInterestBilled
           - EMIInterestBilled
@@ -174,13 +138,10 @@ spec:
           - CashPrincipalBilled
           - EMIPrincipalBilled
           - RetailPrincipalBilled
-          - LateFeeUnbilled
-          - InsufficientFundFeeUnbilled
-          - OverlimitFeeUnbilled
-          - CollectionFeeUnbilled
+          - LateFeeUnbille
+          - OverlimitFeeUnbille
           - CashAdvanceFeeUnbilled
-          - RetailMiscFeeUnbilled
-          - RetailServiceFeeUnbilled
+          - RetailMiscFeeUnbille
           - AnnualFeeUnbilled
           - CashInterestUnbilled
           - EMIInterestUnbilled
@@ -195,13 +156,9 @@ spec:
           - CashPrincipalBilled
           - EMIPrincipalBilled
           - RetailPrincipalBilled
-          - LateFeeBilled
-          - InsufficientFundFeeBilled
-          - OverlimitFeeBilled
-          - CollectionFeeBilled
-          - CashAdvanceFeeBilled
-          - RetailMiscFeeBilled
-          - RetailServiceFeeBilled
+          - LateFeeBille
+          - OverlimitFeeBille
+          - CashAdvanceFeeBill
           - AnnualFeeBilled
           - CashInterestBilled
           - EMIInterestBilled
@@ -209,13 +166,10 @@ spec:
           - CashPrincipalUnbilled
           - EMIPrincipalUnbilled
           - RetailPrincipalUnbilled
-          - LateFeeUnbilled
-          - InsufficientFundFeeUnbilled
-          - OverlimitFeeUnbilled
-          - CollectionFeeUnbilled
+          - LateFeeUnbille
+          - OverlimitFeeUnbille
           - CashAdvanceFeeUnbilled
-          - RetailMiscFeeUnbilled
-          - RetailServiceFeeUnbilled
+          - RetailMiscFeeUnbille
           - AnnualFeeUnbilled
           - CashInterestUnbilled
           - EMIInterestUnbilled
