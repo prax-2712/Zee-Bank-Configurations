@@ -1,0 +1,229 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyRepaymentPolicy
+metadata:
+  name: zee.ruby.rubyrepaymentpolicy.1011
+spec:
+  metadata:
+    id: ruby.rubyrepaymentpolicy.1011
+    name: 1011 Ruby Repayment Policy
+    description: 1011 Ruby Repayment Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  name: Ruby Repayment Policy
+  code: REPIN001011
+  description: Ruby Repayment Policy
+  repaymentAllocation:
+    aboveMAD:
+      allocationModel: HIGHESTTOLOWESTAPR
+      allocationTieBreaker: REPAYMENTSEQUENCE
+      repaymentSequence:
+        - chargeOffStatuses:
+            - '*'
+          repaymentSequenceTieBreaker: FIFO
+          settlementPriority:
+            - LateFeeBilled
+            - InsufficientFundFeeBilled
+            - OverlimitFeeBilled
+            - CollectionFeeBilled
+            - CashAdvanceFeeBilled
+            - RetailMiscFeeBilled
+            - RetailServiceFeeBilled
+            - AnnualFeeBilled
+            - CashInterestBilled
+            - EMIInterestBilled
+            - RetailInterestBilled
+            - CashPrincipalBilled
+            - EMIPrincipalBilled
+            - RetailPrincipalBilled
+            - LateFeeUnbilled
+            - InsufficientFundFeeUnbilled
+            - OverlimitFeeUnbilled
+            - CollectionFeeUnbilled
+            - CashAdvanceFeeUnbilled
+            - RetailMiscFeeUnbilled
+            - RetailServiceFeeUnbilled
+            - AnnualFeeUnbilled
+            - CashInterestUnbilled
+            - EMIInterestUnbilled
+            - RetailInterestUnbilled
+            - CashPrincipalUnbilled
+            - EMIPrincipalUnbilled
+            - RetailPrincipalUnbilled
+        - chargeOffStatuses:
+            - FINAL_CHARGEOFF
+          repaymentSequenceTieBreaker: FIFO
+          settlementPriority:
+            - CashPrincipalBilled
+            - EMIPrincipalBilled
+            - RetailPrincipalBilled
+            - LateFeeBilled
+            - InsufficientFundFeeBilled
+            - OverlimitFeeBilled
+            - CollectionFeeBilled
+            - CashAdvanceFeeBilled
+            - RetailMiscFeeBilled
+            - RetailServiceFeeBilled
+            - AnnualFeeBilled
+            - CashInterestBilled
+            - EMIInterestBilled
+            - RetailInterestBilled
+            - CashPrincipalUnbilled
+            - EMIPrincipalUnbilled
+            - RetailPrincipalUnbilled
+            - LateFeeUnbilled
+            - InsufficientFundFeeUnbilled
+            - OverlimitFeeUnbilled
+            - CollectionFeeUnbilled
+            - CashAdvanceFeeUnbilled
+            - RetailMiscFeeUnbilled
+            - RetailServiceFeeUnbilled
+            - AnnualFeeUnbilled
+            - CashInterestUnbilled
+            - EMIInterestUnbilled
+            - RetailInterestUnbilled
+    belowMAD:
+      allocationModel: LOWESTTOHIGHESTAPR
+      allocationTieBreaker: REPAYMENTSEQUENCE
+      repaymentSequence:
+        - chargeOffStatuses:
+            - '*'
+          repaymentSequenceTieBreaker: FIFO
+          settlementPriority:
+            - LateFeeBilled
+            - InsufficientFundFeeBilled
+            - OverlimitFeeBilled
+            - CollectionFeeBilled
+            - CashAdvanceFeeBilled
+            - RetailMiscFeeBilled
+            - RetailServiceFeeBilled
+            - AnnualFeeBilled
+            - CashInterestBilled
+            - EMIInterestBilled
+            - RetailInterestBilled
+            - CashPrincipalBilled
+            - EMIPrincipalBilled
+            - RetailPrincipalBilled
+            - LateFeeUnbilled
+            - InsufficientFundFeeUnbilled
+            - OverlimitFeeUnbilled
+            - CollectionFeeUnbilled
+            - CashAdvanceFeeUnbilled
+            - RetailMiscFeeUnbilled
+            - RetailServiceFeeUnbilled
+            - AnnualFeeUnbilled
+            - CashInterestUnbilled
+            - EMIInterestUnbilled
+            - RetailInterestUnbilled
+            - CashPrincipalUnbilled
+            - EMIPrincipalUnbilled
+            - RetailPrincipalUnbilled
+        - chargeOffStatuses:
+            - FINAL_CHARGEOFF
+          repaymentSequenceTieBreaker: FIFO
+          settlementPriority:
+            - CashPrincipalBilled
+            - EMIPrincipalBilled
+            - RetailPrincipalBilled
+            - LateFeeBilled
+            - InsufficientFundFeeBilled
+            - OverlimitFeeBilled
+            - CollectionFeeBilled
+            - CashAdvanceFeeBilled
+            - RetailMiscFeeBilled
+            - RetailServiceFeeBilled
+            - AnnualFeeBilled
+            - CashInterestBilled
+            - EMIInterestBilled
+            - RetailInterestBilled
+            - CashPrincipalUnbilled
+            - EMIPrincipalUnbilled
+            - RetailPrincipalUnbilled
+            - LateFeeUnbilled
+            - InsufficientFundFeeUnbilled
+            - OverlimitFeeUnbilled
+            - CollectionFeeUnbilled
+            - CashAdvanceFeeUnbilled
+            - RetailMiscFeeUnbilled
+            - RetailServiceFeeUnbilled
+            - AnnualFeeUnbilled
+            - CashInterestUnbilled
+            - EMIInterestUnbilled
+            - RetailInterestUnbilled
+  otherCreditAllocation:
+    allocationModel: HIGHESTTOLOWESTAPR
+    allocationTieBreaker: REPAYMENTSEQUENCE
+    repaymentSequence:
+      - chargeOffStatuses:
+          - '*'
+        repaymentSequenceTieBreaker: FIFO
+        settlementPriority:
+          - LateFeeBilled
+          - InsufficientFundFeeBilled
+          - OverlimitFeeBilled
+          - CollectionFeeBilled
+          - CashAdvanceFeeBilled
+          - RetailMiscFeeBilled
+          - RetailServiceFeeBilled
+          - AnnualFeeBilled
+          - CashInterestBilled
+          - EMIInterestBilled
+          - RetailInterestBilled
+          - CashPrincipalBilled
+          - EMIPrincipalBilled
+          - RetailPrincipalBilled
+          - LateFeeUnbilled
+          - InsufficientFundFeeUnbilled
+          - OverlimitFeeUnbilled
+          - CollectionFeeUnbilled
+          - CashAdvanceFeeUnbilled
+          - RetailMiscFeeUnbilled
+          - RetailServiceFeeUnbilled
+          - AnnualFeeUnbilled
+          - CashInterestUnbilled
+          - EMIInterestUnbilled
+          - RetailInterestUnbilled
+          - CashPrincipalUnbilled
+          - EMIPrincipalUnbilled
+          - RetailPrincipalUnbilled
+      - chargeOffStatuses:
+          - FINAL_CHARGEOFF
+        repaymentSequenceTieBreaker: FIFO
+        settlementPriority:
+          - CashPrincipalBilled
+          - EMIPrincipalBilled
+          - RetailPrincipalBilled
+          - LateFeeBilled
+          - InsufficientFundFeeBilled
+          - OverlimitFeeBilled
+          - CollectionFeeBilled
+          - CashAdvanceFeeBilled
+          - RetailMiscFeeBilled
+          - RetailServiceFeeBilled
+          - AnnualFeeBilled
+          - CashInterestBilled
+          - EMIInterestBilled
+          - RetailInterestBilled
+          - CashPrincipalUnbilled
+          - EMIPrincipalUnbilled
+          - RetailPrincipalUnbilled
+          - LateFeeUnbilled
+          - InsufficientFundFeeUnbilled
+          - OverlimitFeeUnbilled
+          - CollectionFeeUnbilled
+          - CashAdvanceFeeUnbilled
+          - RetailMiscFeeUnbilled
+          - RetailServiceFeeUnbilled
+          - AnnualFeeUnbilled
+          - CashInterestUnbilled
+          - EMIInterestUnbilled
+          - RetailInterestUnbilled
+  repaymentReversal:
+    excessAttributionPostingCategory: RetailPrincipalUnbilled
+    lateFeeAdjustment: true
+    interestAdjustment: true
+  validFrom: '2015-07-25T23:09:01.795+07:00'
+  validTill: '2099-07-25T23:09:01.795+07:00'
+  templateCode: us-credit
