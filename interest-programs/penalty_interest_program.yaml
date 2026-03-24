@@ -1,0 +1,42 @@
+programCode: PENALTY_INT_PGM
+name: PENALTY_INT_PGM
+description: Penalty interest program for overdue balances
+programType: PENALTY
+rateType: VARIABLE
+precedenceCode: 200   # Higher than general interest
+
+validFrom: 1262304000000
+validUntil: 32503680000000
+
+interestRules:
+  - ruleId: PEN_RULE01
+    precedenceCode: 200
+
+    applicableTo:
+      postingCategories:
+        - RetailPrincipalBilled
+        - RetailPrincipalUnbilled
+        - RetailInterestBilled
+        - RetailInterestUnbilled
+        - CashPrincipalBilled
+        - CashPrincipalUnbilled
+        - CashInterestBilled
+        - CashInterestUnbilled
+        - FeeBilled
+      minValueThreshold: 0
+      maxValueThreshold: 999999999
+      transactionSelectionCriterion: >
+        function evaluate(ruleContext){
+          return ruleContext.daysPastDue >= 60;
+        }
+
+    benefitValidUntilType: OPEN
+
+    modelParameters:
+      gracePeriodType: ABSOLUTE
+      gracePeriod: 0
+      rateTable: /rateSpecificationCodes/ZEE_PENALTY_01
+      rateTableVersion: 1
+      margin: 23.15
+      maxRate: 29.9
+attributes: {}

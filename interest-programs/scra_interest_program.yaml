@@ -1,0 +1,31 @@
+programCode: GENERAL_INT_PGM
+name: GENERAL_INT_PGM
+description: General interest program - 44.4% PA
+programType: SCRA
+rateType: FIXED
+precedenceCode: '1000'
+
+validFrom: 1262304000000
+validUntil: 32503680000000
+
+interestRules:
+  - ruleId: RULE01
+    precedenceCode: 100
+
+    applicableTo:
+      minValueThreshold: 0
+      maxValueThreshold: 999999999
+      postingCategories:
+       - '*'
+      transactionSelectionCriterion: |
+              function evaluate(ruleContext) { var tags = ruleContext.ledgerInfo.tags || []; var valueDateStr = ruleContext.postingInfo.formattedValueDate; if (!valueDateStr) return false; function parseDate(dateStr) { return dateStr ? new Date(dateStr) : null; } function parseQueryParams(query) { var result = {}; var pairs = query.split("&"); for (var j = 0; j < pairs.length; j++) { var pair = pairs[j].split("="); var key = decodeURIComponent(pair[0]); var value = decodeURIComponent(pair.length > 1 ? pair[1] : ""); result[key] = value; } return result; } function checkIfSCRAValidAsOfPostingValueDate(tags, valueDate) { for (var i = 0; i < tags.length; i++) { var tag = tags[i]; if (tag.indexOf("tag://SCRAStatus/") !== 0) continue; try { var parts = tag.split("?"); var base = parts[0]; var query = parts.length > 1 ? parts[1] : ""; var level = base.substring(base.lastIndexOf("/") + 1); var params = parseQueryParams(query); var effectiveFrom = parseDate(params["effectiveFrom"]); var expiryDate = parseDate(params["expiryDate"]); if (!effectiveFrom) continue; if (expiryDate) { if (expiryDate >= effectiveFrom) { return valueDate >= effectiveFrom && valueDate <= expiryDate; } return false; } return valueDate >= effectiveFrom && level === "LEVEL_1"; } catch (e) { continue; } } return false; } var valueDate = parseDate(valueDateStr); if (!valueDate) return false; return checkIfSCRAValidAsOfPostingValueDate(tags, valueDate); }
+    modelParameters:
+      gracePeriodType: POLICY
+      gracePeriod: 0
+      interestRate: 6.0
+      rateTableVersion: 1
+      maxRate: 6.0
+attributes: {}    
+      
+
+  

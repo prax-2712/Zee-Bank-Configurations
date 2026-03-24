@@ -1,0 +1,21 @@
+rateSpecificationCode: ZEE_BT_01
+name: ZEE Balance Transfer Rate
+description: Standard balance transfer APR (no grace period)
+
+validFrom: "01-01-2010"
+validTill: "01-01-2999"
+
+rateTiers:
+  - fromAmount: 0.00
+    toAmount: 999999999.99
+    interestRate: 6.75
+
+    fromTenure:
+      years: 0
+      months: 0
+      days: 0
+
+    toTenure:
+      years: 99
+      months: 11
+      days: 30

@@ -1,0 +1,70 @@
+policyType: in.zeta.policy.charge.EventBasedChargePolicy
+validFrom: "2010-01-01"
+validTo: "2999-01-01"
+code: US_PREMIUM_CC_001
+name: US Premium Credit Card Interest Policy
+description: Interest Policy for Turbo Premium Credit Card – US compliant
+
+tags: >
+  [tag://policyType/statementPolicy?policySpecificationCode=US001&policyCode=USPREM001&version=1]
+
+flags:
+  isValid: true
+
+body:
+  assessmentParameters:
+    computationType: DAILY_BALANCE_WITH_DAILY_COMPOUNDING
+
+  liquidationParameters:
+    interestThreshold: 0
+    roundingRule: NEAR
+    roundingUnit: 1
+    applyMinimumInterestFee: true
+    applyInterestIfMinimumInterestFeeNotApplied: true
+    dayCountMethod: ACTUAL_365
+    gracePeriodApplicableOnInterest: true
+
+    varianceType: VARIABLE
+    percentageValue: 6.0
+    paymentVarianceLimit:
+      maxValue: 50
+      minValue: 5
+
+    payOffVariance: 5
+
+    openingBalancePayOffVariance:
+      amount: 10
+      currency: USD
+      varianceType: VARIABLE
+      percentageValue: 6.0
+      paymentVarianceLimit:
+        maxValue: 50
+        minValue: 5
+
+    paymentPostingCategory: rePayments
+    debitEffectiveFrom: ValueDate
+
+    liquidationModels:
+      - balanceType: CASH
+        unBilled: BILL_UNCONDITIONAL
+        billed: BILL_UNCONDITIONAL
+        interestProgramTag: tag://program/GENERAL_INT_PGM
+
+      - balanceType: RETAIL
+        unBilled: DEFER_CURRENT_IF_OPEN_BALANCE_PAID_ELSE_BILL_CURRENT
+        billed: WaiveDeferredAndWaiveCurrentIfTransactorInCurrentAndPreviousPeriodElseBillDeferredAndBillCurrent
+        interestProgramTag: tag://program/GENERAL_INT_PGM
+      - balanceType: BALANCE_TRANSFER
+        unBilled: BILL_UNCONDITIONAL
+        billed: BILL_UNCONDITIONAL
+        interestProgramTag: tag://program/BT_INT_PGM
+
+    isInterestOnOnlyResidualInterestAllowed: true
+    aggregationStrategy: ProgramType
+    ratificationStrategy: NEXTCYCLE
+    gracePeriodCriteria: TransactorInCurrentAndPreviousCycle
+    statementBalancePayoffStatusDerivationMethod: CONSIDER_REPAYMENTS_AND_OTHER_ELIGIBLE_CREDITS
+
+    interestWaivers:
+      - programTag: ""
+        description: Interest waiver program for promotions, goodwill adjustments, or hardship cases

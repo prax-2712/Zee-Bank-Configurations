@@ -1,0 +1,41 @@
+programCode: BT_INT_PGM
+name: ZEE_PREMIUM_BT_PROGRAM
+description: Standard Balance Transfer Interest for Premium Card
+
+programType: BALANCE_TRANSFER
+rateType: VARIABLE
+precedenceCode: 150
+
+validFrom: 1262304000000
+validUntil: 32503680000000
+
+interestRules:
+  - ruleId: BT_RULE_01
+    precedenceCode: 150
+
+    applicableTo:
+      postingCategories:
+        - BalanceTransferPrincipalBilled
+        - BalanceTransferPrincipalUnbilled
+        - BalanceTransferInterestBilled
+        - BalanceTransferInterestUnbilled
+
+      minValueThreshold: 0
+      maxValueThreshold: 999999999
+
+      transactionSelectionCriterion: >
+        function evaluate(ruleContext){
+          return true;
+        }
+
+    benefitValidUntilType: OPEN
+
+    modelParameters:
+      gracePeriodType: ABSOLUTE
+      gracePeriod: 0
+
+      rateTable: /rateSpecificationCodes/ZEE_BT_01
+      rateTableVersion: 1
+
+      margin: 18.24
+      maxRate: 28.0

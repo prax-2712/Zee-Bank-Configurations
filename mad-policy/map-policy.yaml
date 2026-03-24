@@ -1,0 +1,78 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyMinimumAmountDuePolicy
+metadata:
+  name: zee.ruby.rubyminimumamountduepolicy.7002
+spec:
+  metadata:
+    id: ruby.rubyminimumamountduepolicy.7002
+    name: 7002 Ruby Minimum Amount Due Policies
+    description: 7002 Ruby Minimum Amount Due Policies
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  validFrom: '2000-01-01T23:09:01.795+07:00'
+  validTill: '2999-01-01T23:09:01.795+07:00'
+  name: Minimum Amount Due Policy
+  description: Minimum Amount Due  Policy
+  code: MADUS007002
+  minimumMadAmount: 35
+  modelParameters:
+    keyDateForAnnualFeeConsideration: FIRST_ANNIVERSARY_OF_ACCOUNT_OPEN_DATE
+    roundingForCategoryContribution: ROUNDUP
+    minimumAmountDueThreshold: '35'
+    roundingForMinimumAmountDue: ROUNDUP
+  postingCategoriesComponent:
+    - percentage: 100
+      postingCategory: CashInterestBilled
+    - percentage: 100
+      postingCategory: RetailInterestBilled
+    - percentage: 100
+      postingCategory: CashAdvanceFeeBilled
+    - percentage: 100
+      postingCategory: RetailServiceFeeBilled
+    - percentage: 100
+      postingCategory: LateFeebilled
+    - percentage: 100
+      postingCategory: AnnualFeeBilled
+    - percentage: 100
+      postingCategory: RetailMiscFeeBilled
+    - percentage: 100
+      postingCategory: InsufficientFundFeeBilled
+    - percentage: 100
+      postingCategory: CashPrincipalBilled
+    - percentage: 3
+      postingCategory: RetailPrincipalBilled
+    - percentage: 3
+      postingCategory: CashInterestUnbilled
+    - percentage: 100
+      postingCategory: RetailInterestUnbilled
+    - percentage: 100
+      postingCategory: CashAdvanceFeeUnbilled
+    - percentage: 100
+      postingCategory: RetailServiceFeeUnbilled
+    - percentage: 100
+      postingCategory: LateFeeUnbilled
+    - percentage: 100
+      postingCategory: AnnualFeeUnbilled
+    - percentage: 100
+      postingCategory: RetailMiscFeeUnbilled
+    - percentage: 100
+      postingCategory: InsufficientFundFeeUnbilled
+    - percentage: 100
+      postingCategory: CashPrincipalUnbilled
+    - percentage: 3
+      postingCategory: RetailPrincipalUnbilled
+    - percentage: 3
+      postingCategory: AccountSetupFeeBilled
+    - percentage: 100
+      postingCategory: AccountSetupFeeUnbilled
+  overwriteDefaultBehaviour: true
+  overwriteMADFunction: |
+   function madFormula(args){var isNotNull=function(v){return v!=null&&v!=undefined;},getModelParam=function(p,d){return(isNotNull(args.modelparameters)&&isNotNull(args.modelparameters[p]))?args.modelparameters[p]:d;},applyRounding=function(v,s){var d=v/100;return s==='ROUNDUP'?Math.ceil(d)*100:s==='ROUNDDOWN'?Math.floor(d)*100:Math.round(d)*100;};if(!isNotNull(args.currentbalance)||args.currentbalance<=0){return JSON.stringify({currentminimumamountdue:0,previousminimumamountdue:0,totalminimumamountdue:0,billed_contribution:0,unbilled_contribution:0,incrementaloverlimit:0});}var billedContribution=(1.00*(args.postingcategories.cashinterestbilled||0))+(1.00*(args.postingcategories.retailinterestbilled||0))+(1.00*(args.postingcategories.cashadvancefeebilled||0))+(1.00*(args.postingcategories.retailservicefeebilled||0))+(1.00*(args.postingcategories.latefeebilled||0))+(1.00*(args.postingcategories.annualfeebilled||0))+(1.00*(args.postingcategories.retailmiscfeebilled||0))+(1.00*(args.postingcategories.insufficientfundfeebilled||0))+(0.03*(args.postingcategories.cashprincipalbilled||0))+(0.03*(args.postingcategories.retailprincipalbilled||0))+(1.00*(args.postingcategories.accountsetupfeebilled||0));var unbilledContribution=(1.00*(args.postingcategories.cashinterestunbilled||0))+(1.00*(args.postingcategories.retailinterestunbilled||0))+(1.00*(args.postingcategories.cashadvancefeeunbilled||0))+(1.00*(args.postingcategories.retailservicefeeunbilled||0))+(1.00*(args.postingcategories.latefeeunbilled||0))+(1.00*(args.postingcategories.annualfeeunbilled||0))+(1.00*(args.postingcategories.retailmiscfeeunbilled||0))+(1.00*(args.postingcategories.insufficientfundfeeunbilled||0))+(0.03*(args.postingcategories.cashprincipalunbilled||0))+(0.03*(args.postingcategories.retailprincipalunbilled||0))+(1.00*(args.postingcategories.accountsetupfeeunbilled||0));var currentBalance=args.currentbalance||0,creditLimit=args.currentcreditlimit||0,incrementalOverLimit=Math.max(0,currentBalance-creditLimit);var currMADFromCategories=billedContribution+unbilledContribution;currMADFromCategories=Math.max(currMADFromCategories,incrementalOverLimit);var minThreshold=Number(getModelParam('minimumAmountDueThreshold',35));var finalCurrMAD=Math.max(currMADFromCategories,minThreshold);var roundingStrategy=getModelParam('roundingForMinimumAmountDue','ROUNDUP');finalCurrMAD=applyRounding(finalCurrMAD,roundingStrategy);var previousMAD=Number(args.postingcategories.minimumamountdue||0);var totalMAD=finalCurrMAD+previousMAD;if(totalMAD>currentBalance){totalMAD=Math.max(currentBalance,0);finalCurrMAD=Math.max(totalMAD-previousMAD,0);}return JSON.stringify({currentminimumamountdue:finalCurrMAD,previousminimumamountdue:previousMAD,totalminimumamountdue:totalMAD,billed_contribution:billedContribution,unbilled_contribution:unbilledContribution,incrementaloverlimit:incrementalOverLimit});}
+  templateCode: us-credit
+
+
+
+

@@ -1,0 +1,21 @@
+rateSpecificationCode: ZEE_PENALTY_01
+name: ZEE Penalty Rate
+description: Penalty APR for overdue balances
+
+validFrom: "01-01-2010"
+validTill: "01-01-2999"
+
+rateTiers:
+  - fromAmount: 0.00
+    toAmount: 999999999.99
+    interestRate: 5.75
+
+    fromTenure:
+      years: 0
+      months: 0
+      days: 0
+
+    toTenure:
+      years: 99
+      months: 11
+      days: 30

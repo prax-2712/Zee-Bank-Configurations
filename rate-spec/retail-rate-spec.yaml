@@ -1,0 +1,21 @@
+rateSpecificationCode: ZEE_RETAIL_01
+name: ZEE Retail Interest Rate
+description: Retail purchase APR for credit card balances
+
+validFrom: "01-01-2010"
+validTill: "01-01-2999"
+
+rateTiers:
+  - fromAmount: 0.00
+    toAmount: 999999999.99
+    interestRate: 6.75
+
+    fromTenure:
+      years: 0
+      months: 0
+      days: 0
+
+    toTenure:
+      years: 99
+      months: 11
+      days: 30

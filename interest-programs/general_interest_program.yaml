@@ -1,0 +1,59 @@
+programCode: GENERAL_INT_PGM
+name: GENERAL_INT_PGM
+description: General interest program
+programType: GENERAL
+rateType: VARIABLE
+precedenceCode: 100
+
+validFrom: 1262304000000
+validUntil: 32503680000000
+
+interestRules:
+  - ruleId: RULE01
+    precedenceCode: 100
+
+    applicableTo:
+      postingCategories:
+        - RetailPrincipalUnbilled
+        - RetailPrincipalBilled
+        - RetailInterestUnbilled
+        - RetailInterestBilled
+      minValueThreshold: 0
+      maxValueThreshold: 999999999
+      transactionSelectionCriterion: >
+        function evaluate(ruleContext){ return true; }
+
+    benefitValidUntilType: OPEN
+
+    modelParameters:
+      gracePeriodType: POLICY
+      gracePeriod: 0
+      rateTable: /rateSpecificationCodes/ZEE_RETAIL_01
+      rateTableVersion: 1
+      margin: 18.24
+      maxRate: 28.0
+
+  - ruleId: RULE02
+    precedenceCode: 110
+
+    applicableTo:
+      postingCategories:
+        - CashPrincipalUnbilled
+        - CashPrincipalBilled
+        - CashInterestUnbilled
+        - CashInterestBilled
+      minValueThreshold: 0
+      maxValueThreshold: 999999999
+      transactionSelectionCriterion: >
+        function evaluate(ruleContext){ return true; }
+
+    benefitValidUntilType: OPEN
+
+    modelParameters:
+      gracePeriodType: ABSOLUTE
+      gracePeriod: 0
+      rateTable: /rateSpecificationCodes/ZEE_CASH_01
+      rateTableVersion: 1
+      margin: 23.24
+      maxRate: 30.0
+  

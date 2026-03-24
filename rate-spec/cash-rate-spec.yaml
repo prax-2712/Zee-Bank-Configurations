@@ -1,0 +1,21 @@
+rateSpecificationCode: ZEE_CASH_01
+name: ZEE Cash Advance Rate
+description: Cash advance APR for credit card balances (no grace period)
+
+validFrom: "01-01-2010"
+validTill: "01-01-2999"
+
+rateTiers:
+  - fromAmount: 0.00
+    toAmount: 999999999.99
+    interestRate: 6.75
+
+    fromTenure:
+      years: 0
+      months: 0
+      days: 0
+
+    toTenure:
+      years: 99
+      months: 11
+      days: 30
