@@ -1,0 +1,57 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyAccountClosurePolicy
+metadata:
+  name: premium.us.accountclosurepolicy.9001
+
+spec:
+  metadata:
+    id: premium.us.accountclosurepolicy.9001
+    name: Premium US Account Closure Policy
+    description: Account Closure Policy for Affluent Customers
+    requester:
+      module: premium-module
+      moduleVersion: 1.0.0
+    tenantId: '900001'
+    tenantCode: premiumUS
+
+  name: Premium Account Closure Policy
+  code: ACPUS009001
+  description: Closure policy for premium US credit cards
+
+  reason:
+    - reasonCode: Delinquency
+      maxDebitBalForWriteOff: 0
+    - reasonCode: Dormancy
+      maxDebitBalForWriteOff: 25
+    - reasonCode: NonActivation
+      maxDebitBalForWriteOff: 500
+    - reasonCode: CustomerRequest
+      maxDebitBalForWriteOff: 10
+    - reasonCode: BankInitiated
+      maxDebitBalForWriteOff: 10
+    - reasonCode: Others
+      maxDebitBalForWriteOff: 50
+    - reasonCode: AHDeceasedInitiated
+      maxDebitBalForWriteOff: 1000
+
+  systemInitiatedClosureCriteria:
+
+    - rule:
+        status:
+          uri: tag://manualBundleStatusDeceased/MBAD2
+          effectiveFromDays: 1
+      autoAcceptance: true
+      priority: 1
+      reasonCode: AHDeceasedInitiated
+
+    - rule:
+        dpd: 180
+      autoAcceptance: true
+      priority: 3
+      reasonCode: Delinquency
+
+
+  validFrom: '2020-01-01T00:00:00Z'
+  validTill: '2999-01-01T00:00:00Z'
+
+  templateCode: us-premium-cred

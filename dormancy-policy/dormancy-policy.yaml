@@ -1,0 +1,42 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubyDormancyPolicy
+metadata:
+  name: zee.ruby.rubydormancypolicy.1011
+spec:
+  metadata:
+    id: ruby.rubydormancypolicy.1011
+    name: 1011 Dormancy Policy
+    description: 1011 Dormancy Policy
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: lsg
+  name: Dormancy Policy
+  code: DORIN001011
+  description: Dormancy Policy
+  applicableVoucherCodesCredit:
+    - CARD_PURCHASE_CLEARANCE_REFUND
+    - CARD_CASH_CLEARANCE_REFUND
+    - REPAYMENT
+  applicableVoucherCodesDebit:
+    - CARD_PURCHASE_PLACE_HOLD
+    - CARD_CASH_PLACE_HOLD
+    - CARD_PURCHASE_CLEARANCE_AGAINST_HOLD
+    - CARD_CASH_CLEARANCE_AGAINST_HOLD
+  dormancyRules:
+    - level: 1
+      description: Dormant for 90 days
+      days: 90
+    - level: 2
+      description: Dormant for 120 days
+      days: 120
+    - level: 3
+      description: Dormant for 180 days
+      days: 180
+    - level: 4
+      description: Dormant for 365 days
+      days: 365
+  validFrom: '2015-07-25T23:09:01.795+07:00'
+  validTill: '2099-07-25T23:09:01.795+07:00'
+  templateCode: us-credit

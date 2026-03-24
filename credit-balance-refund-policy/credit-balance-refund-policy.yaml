@@ -1,0 +1,21 @@
+policyType: in.zeta.policy.credit.CreditBalanceRefundPolicy
+
+code: CBRIN001001
+name: Credit Balance Handling
+description: Credit Balance Handling
+
+validFrom: "01-01-2010"
+validTo: "01-01-2999"
+
+body:
+  refundType: EXCESS
+  ageThresholdInDays: 3
+  balanceThreshold: 2000
+  automaticRefundEnabled: true
+
+  creditBalanceHandlingModel: AUTOREFUND
+  sourceCategory: ExcessPayment
+
+  selectionCriteria:
+    keyDate: REGULAR_DATE
+    frequency: CYCLE
