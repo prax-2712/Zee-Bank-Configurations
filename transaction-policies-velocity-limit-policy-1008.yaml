@@ -1,0 +1,51 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: TransactionPolicy
+metadata:
+  name: zee.aura.configuration.transaction-policy-velocity-limit-policy
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-mumbai.lsg","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-mumbai.lsg.git","filePath":"module_configurations/module_athena/transactions-policies/transaction-policy_transaction-policies-velocity-limit-policy.yaml","tenantCode":"lsg"}'
+spec:
+  metadata:
+    id: aura.transaction-policy.velocity-limit-policy
+    name: TransactionPolicy
+    description: TransactionPolicy
+    requester:
+      module: aura-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: lsg
+  code: TPOUS00300108
+  coaCode: COAUS003001
+  description: velocity limit policy for transaction restriction
+  policyScope: EACH_ACCOUNT_OF_ACCOUNT_HOLDER
+  effectiveFrom: '2006-03-24T11:54:14.000Z'
+  expiresAt: '2099-03-24T11:54:14.000Z'
+  violationAction: DECLINE_AND_NOTIFY
+  accountsApplicableTo:
+    - key: value
+  attributes: {
+    }
+  aggregateRules:
+    - action: DEBIT
+      transactionCategoryCode: RETAIL_CASH_TRANSACTIONS
+      aggExpressionCode: '6'
+      errorCode: RETAIL_CASH_TXN_DAILY_COUNT_EXCEEDED
+      type: VELOCITY
+      cycleURI: cycleCode://CLKUS003001_CBU
+      maxLimit: 3
+    - action: DEBIT
+      transactionCategoryCode: RETAIL_PURCHASE_TRANSACTIONS
+      aggExpressionCode: '6'
+      errorCode: WEEKLY_VELOCITY_LIMIT_EXCEEDED
+      type: VELOCITY
+      cycleURI: cycleCode://CALENDAR_YEAR_WEEKLY_6190154301701030316
+      maxLimit: 100
+    - action: DEBIT
+      transactionCategoryCode: RETAIL_PURCHASE_TRANSACTIONS
+      aggExpressionCode: '6'
+      errorCode: DAILY_VELOCITY_LIMIT_EXCEEDED
+      type: VELOCITY
+      cycleURI: cycleCode://CALENDAR_YEAR_DAILY_6190154301701030316
+      maxLimit: 25

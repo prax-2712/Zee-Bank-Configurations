@@ -1,0 +1,53 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: RubySpendLimitPolicy
+metadata:
+  name: zee.ruby.rubydailyspendlimitpolicy.1018
+spec:
+  metadata:
+    id: ruby.rubyspendlimitpolicy.1018
+    name: 1018 Ruby daily Spend Limit Policies
+    description: 1018 Ruby daily Spend Limit Policies
+    requester:
+      module: ruby-module-e2e
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: lsg
+  validFrom: 2015-07-25T23:09:01Z
+  validTill: 2099-07-25T23:09:01Z
+  name: Daily Spend Limit Policy 1018
+  description: Daily Spend Limit Policy 1018
+  code: SPLIN001018
+  coaCode: COAUS003001
+  disabledForNewCards:
+    - DOMESTIC_ECOM
+    - DOMESTIC_CONTACTLESS
+    - INTERNATIONAL_POS
+    - INTERNATIONAL_ECOM
+    - INTERNATIONAL_ATM
+    - INTERNATIONAL_CONTACTLESS
+  defaultLimitsForNewCards:
+    - category: DOMESTIC_ECOM
+      limitType: DAILY
+      limitValue: '150000'
+    - category: DOMESTIC_POS
+      limitType: DAILY
+      limitValue: '150000'
+    - category: DOMESTIC_ATM
+      limitType: DAILY
+      limitValue: '5000'
+    - category: DOMESTIC_CONTACTLESS
+      limitType: DAILY
+      limitValue: '2500'
+    - category: INTERNATIONAL_ECOM
+      limitType: DAILY
+      limitValue: '150000'
+    - category: INTERNATIONAL_POS
+      limitType: DAILY
+      limitValue: '150000'
+    - category: INTERNATIONAL_ATM
+      limitType: DAILY
+      limitValue: '5000'
+    - category: INTERNATIONAL_CONTACTLESS
+      limitType: DAILY
+      limitValue: '2500'
+  templateCode: us-credit
