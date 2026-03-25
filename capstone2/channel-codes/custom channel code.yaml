@@ -27,12 +27,12 @@ spec:
     ["OFAC"]
 
   paymentCodes:
-    - PURCHASE
-    - CASH_ADVANCE
-    - REFUND
-    - REVERSAL
-    - PREAUTH
-    - PREAUTH_COMPLETION
+    - PMCUSZZ110221103
+    - PMCUSZZ110221113
+    - PMCUSZZ110221123
+    - PMCUSZZ110221323
+    - PMCUSZZ110222343
+    - PMCUSZZ110222433
 
 
   channelSpecification:
