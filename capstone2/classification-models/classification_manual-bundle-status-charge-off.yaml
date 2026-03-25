@@ -1,0 +1,64 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationModel
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-model.manual-bundle-status-charge-off
+
+spec:
+  associationAttributes: {}
+  associationCardinality: Single
+
+  attributes:
+    type: manual
+    isDerived: 'true'
+    sourceEntityType: Account
+    sourceStatusModelCode: manualChargeOffStatus
+    sourceModelUnitToBundleStatusMap: |
+      {
+        "LEVEL_1": "ZEE_MBCO1",
+        "LEVEL_2": "ZEE_MBCO2"
+      }
+
+  classificationFunction: |
+    function classificationUnits(object) {
+      if (!object.hasOwnProperty('sourceStatusModelCode') || !object.hasOwnProperty('sourceStatusClassificationUnit')) {
+        return {};
+      }
+
+      var sourceStatusModelCode = object.sourceStatusModelCode;
+      var sourceStatusClassificationUnit = object.sourceStatusClassificationUnit;
+
+      var classificationMap = {
+        'manualChargeOffStatus': {
+          'LEVEL_1': ['ZEE_MBCO1'],
+          'LEVEL_2': ['ZEE_MBCO2']
+        }
+      };
+
+      if (classificationMap[sourceStatusModelCode]) {
+        return classificationMap[sourceStatusModelCode][sourceStatusClassificationUnit] || ['UNCLASSIFIED'];
+      }
+
+      return ['UNCLASSIFIED'];
+    }
+
+  code: manualBundleStatusChargeOff
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  isRuleBased: true
+
+  metadata:
+    description: Bundle Status ManualChargeOff Classification Model.
+    id: aether.classification-model.manual-bundle-status-charge-off
+    name: manual-bundle-status-charge-off
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '999999'
+
+  modelType: Collection
+  name: Bundle Status ManualChargeOff Classification Model
+  objectType: in.zeta.aether.bundle
+  tenantId: '999999'

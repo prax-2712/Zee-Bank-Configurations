@@ -1,0 +1,140 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.acropolis.configuration.binrange.520011-01
+spec:
+  metadata:
+    id: acropolis.configuration.binrange.520011-01
+    name: Bank Zee USA BIN Range 520011-01
+    description: Physical Credit Card BIN Range for Bank Zee (USA, World Elite)
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":{"acs":{"properties":{"avv1.keyid":{"type":"string"},"avv12.keyid":{"type":"string"},"is.enabled":{"type":"boolean"},"name":{"type":"string"}},"type":"object"},"bin":{"type":"string"},"cardConfig":{"properties":{"association.fullCardDetails.allowed":{"type":"boolean"},"atcConfig":{"properties":{"actionResetFixedDelayHours":{"type":"string"},"actionResetPeriod":{"enum":["END_OF_DAY","HOURS"],"type":"string"},"isEnabledForOfflineTxns":{"type":"boolean"},"isEnabledForOnlineTxns":{"type":"boolean"},"threshold":{"type":"number"},"thresholdBreachAction":{"enum":["PERMANENT_BLOCK_CARD","TEMPORARY_BLOCK_CARD","NONE"],"type":"string"}},"type":"object"},"avv.validation.allowed":{"type":"string"},"backdate.transaction.allowed":{"type":"boolean"},"disallowedPatternsForPAN":{"items":{"type":"string"},"type":"array"},"dispatch.allowed":{"type":"boolean"},"incorrectPinConfig":{"properties":{"actionResetFixedDelayHours":{"type":"string"},"actionResetPeriod":{"enum":["END_OF_DAY","HOURS"],"type":"string"},"isEnabledForOfflineTxns":{"type":"boolean"},"isEnabledForOnlineTxns":{"type":"boolean"},"resetCounterOnActionReset":{"type":"boolean"},"threshold":{"type":"number"},"thresholdBreachAction":{"enum":["PERMANENT_BLOCK_CARD","TEMPORARY_BLOCK_CARD","NONE"],"type":"string"},"transactionsAllowedPostThresholdBreach":{"properties":{"domestic":{"items":{"enum":["CARD_PRESENT_WITH_PIN","CARD_PRESENT_WITHOUT_PIN","CARD_NOT_PRESENT"],"type":"string"},"type":"array"},"international":{"items":{"enum":["CARD_PRESENT_WITH_PIN","CARD_PRESENT_WITHOUT_PIN","CARD_NOT_PRESENT"],"type":"string"},"type":"array"}},"type":"object"}},"type":"object"},"maskedPanFormat":{"type":"string"},"maximum.allowed.contactless.amount":{"type":"string"},"offlinePin.verification.enabled":{"type":"boolean"},"stepUp.required":{"type":"boolean"},"tokenization.enabled":{"type":"boolean"}},"type":"object"},"cardType":{"enum":["PHYSICAL","VIRTUAL"],"type":"string"},"clearing":{"properties":{"credit.forUnmatchedMerchandiseReturn.isEnabled":{"type":"string"},"clearance.processor.v2.isEnabled":{"type":"string"},"credit.forUnmatchedRefund.isEnabled":{"type":"string"},"debit.adjustment.forUnmatchedAuth.isEnabled":{"type":"string"},"duplicate.credit.isEnabled":{"type":"string"},"duplicate.debit.isEnabled":{"type":"string"},"failed.credit.isEnabled":{"type":"string"},"failed.debit.isEnabled":{"type":"string"},"forced.debit.isEnabled":{"type":"string"},"late.presentment.credit.isEnabled":{"type":"string"},"late.presentment.debit.isEnabled":{"type":"string"},"merchandiseReturn.capture.isEnabled":{"type":"string"},"opsCentre.processDefinitionKey":{"type":"string"},"payment.capture.withUpdatedAmount.isEnabled":{"type":"string"},"refund.isEnabled":{"type":"string"},"refund.partial.isEnabled":{"type":"string"},"payment.capture.isEnabled":{"type":"string"},"refund.processor.v2.enabled":{"type":"string"},"tat.harmonisation.days":{"type":"number"}},"type":"object"},"features":{"items":{"enum":["EMV","MAG_STRIPE","NFC"],"type":"string"},"type":"array"},"iso":{"properties":{"ac.mk.keyId":{"type":"string"},{"cvc3.keyId":{"type":"string"},"allowed.transaction.currency.list":{"type":"string"},"cardholder.billing.currency":{"type":"string"},"mastercard":{"properties":{"mastercard.memberID":{"type":"string"},"mastercard.pek.setup":{"type":"string"},"pos.zpk.keyid":{"type":"string"},"smc.mk.keyId":{"type":"string"},"smi.mk.keyId":{"type":"string"}},"type":"object"},"visa":{"properties":{"ac.mk.slotId":{"type":"string"},"pos.zpk.keyId":{"type":"string"},"pos.zpk.slotId":{"type":"string"}},"type":"object"}},"type":"object"},"keyConfig":{"properties":{"cavv.generation.mechanism":{"type":"string"},"cavv.slotId":{"type":"string"},"cavv1.keyAlgorithm":{"type":"string"},"cavv1.keyId":{"type":"string"},"cavv12.keyId":{"type":"string"},"cavv2.keyAlgorithm":{"type":"string"},"cavv2.keyId":{"type":"string"},"cvv.generation.mechanism":{"type":"string"},"cvv1.keyAlgorithm":{"type":"string"},"cvv1.keyId":{"type":"string"},"cvv1.service.code":{"type":"string"},"cvv1.slotId":{"type":"string"},"cvv12.keyAlgorithm":{"type":"string"},"cvv12.keyId":{"type":"string"},"cvv12.slotId":{"type":"string"},"cvv2.keyId":{"type":"string"},"cvv2.slotId":{"type":"string"},"offline.pin.crypto.keyId":{"type":"string"}},"type":"object"},"range":{"type":"string"}},"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      bin: '520011' # It defines which bank issued and which network the card uses . IN USA mastercard bin starting with '5' denotes Mastercard
+      range: '01'   # indicates Physical Card 
+      code: ZEE520011-01
+      cardType: PHYSICAL
+
+      acs:
+        is.enrollment.enabled: true
+        algorithm: HMACSHA256
+        iav.mk.keyid: KEYIN98901
+      attributes:
+        channel.code: CHNUSZZ1102
+
+      cardConfig:
+
+        dispatch.allowed: true
+        tokenization.enabled: true
+        stepUp.required: true #perfoming 2FA ( biometric + otp )
+        contactless.transaction.allowed: true
+        maximum.allowed.contactless.amount: '1000000'   # $10,000 equivalent for Affluent
+        
+        # US Display Standard: 6-4-4 masking
+        maskedPanFormat: '[0-9]{6}xxxxxx[0-9]{4}'
+
+        # AVS (Required for USA ecommerce, it used to check the biilling adrees is same as address of customer on onbording)
+        feature.config:
+          avsConfig:
+            enabled: true
+            strategyIndicator: NON_CONDENSED
+        
+        # ATC (Anti-replay protection)
+        atcConfig:
+          isEnabledForOnlineTxns: true
+          isEnabledForOfflineTxns: true
+          threshold: 10
+          thresholdBreachAction: TEMPORARY_BLOCK_CARD
+          actionResetPeriod: HOURS
+          actionResetFixedDelayHours: '24'
+
+        incorrectPinConfig:
+          isEnabledForOfflineTxns: true
+          isEnabledForOnlineTxns: true
+          resetCounterOnActionReset: false
+          threshold: 3
+          thresholdBreachAction: TEMPORARY_BLOCK_CARD
+          actionResetFixedDelayHours: '24'
+          actionResetPeriod: END_OF_DAY
+          transactionsAllowedPostThresholdBreach:
+            domestic:
+              - CARD_PRESENT_WITHOUT_PIN
+            international:
+              - CARD_NOT_PRESENT
+
+        offlinePin.verification.enabled: false
+        
+        track2.cvv1.endIndex: '27'
+        track2.cvv1.startIndex: '24'
+        track1.cvv1.endIndex: '10'
+        track1.cvv1.startIndex: '7'
+        avv.validation.allowed: 'true'
+      
+      # --- 3. US Clearing & Settlement (Reg Z / DMS Compliance) ---
+      clearing:
+        credit.forUnmatchedMerchandiseReturn.isEnabled: 'true'
+        credit.forUnmatchedRefund.isEnabled: 'true'
+        clearance.processor.v2.isEnabled: 'true'
+        clearingType: DMS # Dual Message System: Required for credit/refund logic
+        debit.isEnabled: 'false'
+        debit.blocked.mcc.list: ''
+        refund.partial.blocked.mcc.list: ''
+        debit.adjustment.forUnmatchedAuth.isEnabled: 'true'
+        duplicate.credit.isEnabled: 'true'
+        duplicate.debit.isEnabled: 'true'
+        failed.credit.isEnabled: 'true'
+        failed.debit.isEnabled: 'true'
+        forced.debit.isEnabled: 'true'
+        late.presentment.credit.isEnabled: 'true'
+        late.presentment.debit.isEnabled: 'true'
+        
+        opsCentre.processDefinitionKey: BZ_US_Clearing_Exception_Maker
+        payment.capture.withUpdatedAmount.isEnabled: 'true'
+        refund.isEnabled: 'true'
+        refund.partial.isEnabled: 'true'
+        refund.processor.v2.enabled: 'true'
+
+        payment.capture.isEnabled: 'true'
+        recurring.debit.adjustment.forUnmatchedAuth.isEnabled: 'true'
+        financial.posting.isEnabled: 'true'
+
+      features:
+        - EMV
+        - MAG_STRIPE
+        - NFC
+      iso:
+        ac.mk.keyid: KEYIN589851
+        cvc3.keyId: KEYIN589851
+        allowed.transaction.currency.list: 840,784,971,008,051,532,973,032,036,533,944,977,052,050,975,048,108,060,096,068,984,986,044,064,124,976,947,756,948,990,152,170,970,188,132,203,262,208,214,012,818,232,230,978,242,238,826,981,936,292,270,324,320,328,344,340,332,348,360,376,356,368,352,388,400,392,404,417,116,174,410,414,136,398,418,422,144,430,426,434,504,498,969,807,104,496,446,929,480,462,454,484,979,458,943,516,566,558,578,524,554,512,590,604,598,608,985,600,634,946,941,156,646,682,090,690,938,752,702,654,925,694,706,968,728,930,222,760,748,764,972,934,788,776,949,780,901,834,980,800,997,940,858,927,860,704,548,882,950,961,959,955,956,957,958,951,960,952,964,953,962,994,963,965,999,886,710,967,932,191,586,624,924
+        cardholder.billing.currency: '840'
+        mastercard:
+          mastercard.memberID: 'BZ_US_17051'
+          mastercard.pek.setup: STATIC
+          pos.zpk.keyid: BZ_US_KEY_POS_01
+          smi.mk.keyid: KEYIN589867
+        
+      keyConfig:
+        cvv.generation.mechanism: USING_HSM
+        cvv.slotId: '1'
+        cvv1.keyAlgorithm: DES
+        cvv1.keyId: KEYIN589876
+        cvv1.service.code: '226'
+
+        cavv2.keyAlgorithm: DES
+        cavv2.keyId: KEYIN589900
+       
+        zmkKeyId: KEYIN589942
+      range: '01'
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.acropolis.bin-range
+    displayName: Bin 93838377 Range 01

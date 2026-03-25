@@ -1,0 +1,126 @@
+kind: Channelcode
+apiVersion: rrsd.zetaapps.in/v1alpha1
+
+metadata:
+  name: zee.athena.channelcode.us-affluent-visa-master
+  namespace: athena
+
+spec:
+  metadata:
+    id: athena.channelcode.us-affluent-visa-master
+    name: US Affluent Omni Channel - Zee Bank
+    description: Unified VISA + Mastercard US affluent channel with compliance controls
+    requester:
+      module: athena
+      moduleVersion: 1.0.0
+    tenantId: '999999'
+    tenantCode: zee
+
+  channelCodeId: CHNUSZEE9001
+  code: CHNUSZEE9001
+  name: US Zee Affluent Offus Channel
+  description: High value affluent credit card routing channel (US compliant)
+  status: ACTIVE
+  channelType: US Offus Issuer Channel
+
+  tags:
+    ["OFAC"]
+
+  paymentCodes:
+    - PURCHASE
+    - CASH_ADVANCE
+    - REFUND
+    - REVERSAL
+    - PREAUTH
+    - PREAUTH_COMPLETION
+
+
+  channelSpecification:
+
+    authorizationConfiguration:
+
+      transactionExpirySpecification:
+
+      
+        defaultConfiguration:
+          timeZone: UTC
+          days: 7
+          hours: 0
+
+        ruleBasedConfigurations:
+
+          #  FUEL (MCC 5542)
+          - filters:
+              - type: ISO_DATA_ELEMENTS
+                dataElementInclusions:
+                  - fieldId: '18'
+                    allowedValues: ['5542']
+            filteringCriteria: ALL_FILTERS_SHOULD_PASS
+            timeZone: UTC
+            hours: 2
+            configType: ISSUER_DEFINED
+
+          #  HOTEL / TRAVEL → LONG HOLD (AFFLUENT)
+          - filters:
+              - type: TRANSACTION_PROPERTIES
+                transactionProperties:
+                  authType: PREAUTH
+                  transactionOrigination: INTERNATIONAL
+            filteringCriteria: ALL_FILTERS_SHOULD_PASS
+            timeZone: UTC
+            hours: 480
+            configType: ISSUER_DEFINED
+
+          #  DOMESTIC PREAUTH
+          - filters:
+              - type: TRANSACTION_PROPERTIES
+                transactionProperties:
+                  authType: PREAUTH
+                  transactionOrigination: DOMESTIC
+            filteringCriteria: ALL_FILTERS_SHOULD_PASS
+            timeZone: UTC
+            hours: 336
+            configType: ISSUER_DEFINED
+
+#  COMPLIANCE + SANCTIONS (VERY IMPORTANT)
+    complianceConfiguration:
+
+      sanctions:
+
+        #  COUNTRY BLOCK (IRAN)
+        blockedCountries:
+          - '364'   # Iran ISO country code
+
+        #  HARD DECLINE
+        actionOnMatch: DECLINE
+
+      ofac:
+
+        enabled: true
+        screeningRequired: true
+        blockOnSDNMatch: true
+        blockOnPartialMatch: REVIEW
+
+#  CLEARING RULES
+    clearanceConfiguration: |
+      {
+        "payment.v2.apis.enabled": "false",
+        "isRefundGreaterThanAuthSupported": "true",
+        "allowPartialReversal": "true"
+      }
+
+#  FLAGS (SWITCH BEHAVIOR)
+    flags: |
+      {
+        "switch.capture-with-amount": "ACTIVE",
+        "avs.service-indicator.1": "ACTIVE",
+        "offline.pin.verification.supported": "ACTIVE",
+        "authorization.payment.v2.apis.enabled": "INACTIVE",
+        "fraud.high-value-monitoring": "ACTIVE"
+      }
+
+#  RISKY MCC BLOCK (US BEST PRACTICE)
+    restrictedMccCodes:
+      - '7995'   # Gambling
+      - '6051'   # Crypto
+      - '4829'   # Money transfer

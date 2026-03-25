@@ -1,0 +1,72 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationModel
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-model.manual-bundle-status-bankruptcy
+
+spec:
+  associationAttributes: {}
+  associationCardinality: Single
+
+  attributes:
+    type: manual
+    isDerived: 'true'
+    sourceEntityType: AccountHolder
+    sourceStatusModelCode: BANKRUPTCY
+    sourceModelUnitToBundleStatusMap: |
+      {
+        "BankruptcyInitiated": "ZEE_MBBK1",
+        "BankruptcyClosed": "ZEE_MBBK2",
+        "BankruptcyDismissed": "ZEE_MBBK3",
+        "BankruptcyDischarged": "ZEE_MBBK4",
+        "BankruptcyWithdrawn": "ZEE_MBBK5",
+        "BankruptcyInformed": "ZEE_MBBK6"
+      }
+
+  classificationFunction: |
+    function classificationUnits(object) {
+      if (!object.hasOwnProperty('sourceStatusModelCode') || !object.hasOwnProperty('sourceStatusClassificationUnit')) {
+        return {};
+      }
+
+      var sourceStatusModelCode = object.sourceStatusModelCode;
+      var sourceStatusClassificationUnit = object.sourceStatusClassificationUnit;
+
+      var classificationMap = {
+        'BANKRUPTCY': {
+          'BankruptcyInitiated': ['ZEE_MBBK1'],
+          'BankruptcyClosed': ['ZEE_MBBK2'],
+          'BankruptcyDismissed': ['ZEE_MBBK3'],
+          'BankruptcyDischarged': ['ZEE_MBBK4'],
+          'BankruptcyWithdrawn': ['ZEE_MBBK5'],
+          'BankruptcyInformed': ['ZEE_MBBK6']
+        }
+      };
+
+      if (classificationMap[sourceStatusModelCode]) {
+        return classificationMap[sourceStatusModelCode][sourceStatusClassificationUnit] || ['UNCLASSIFIED'];
+      }
+
+      return ['UNCLASSIFIED'];
+    }
+
+  code: manualBundleStatusBankruptcy
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  isRuleBased: true
+
+  metadata:
+    description: Bundle Status Bankruptcy Classification Model.
+    id: aether.classification-model.manual-bundle-status-bankruptcy
+    name: manual-bundle-status-bankruptcy
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '999999'
+
+  modelType: Collection
+  name: Bundle Status Bankruptcy Classification Model
+  objectType: in.zeta.aether.bundle
+  tenantId: '999999'

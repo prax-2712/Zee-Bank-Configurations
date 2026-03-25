@@ -1,0 +1,31 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-bankruptcy-mbbk5
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusBankruptcy
+  code: MBBK5
+  description: Bankruptcy withdrawn
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: Bankruptcy Withdrawn.
+    id: aether.classification-unit.manual-bundle-status-bankruptcy-mbbk5
+    name: mbbk5
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: Bankruptcy Withdrawn
+  restrictedActionCodes:
+    - REISSUE_CARD
+    - RENEW_CARD
+    - CARD_CASH_PLACE_HOLD
+    - CARD_REPLACEMENT
+    - CARD_PURCHASE_PLACE_HOLD
+    - REPLACE_CARD
+  tenantId: '600309'

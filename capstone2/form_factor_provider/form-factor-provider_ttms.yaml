@@ -1,0 +1,27 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.athena.configuration.module.ttms.form-factor-provider
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-US.zee","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-US.zee.git","filePath":"module_configurations/module_athena/form_factor_provider/form-factor-provider_ttms.yaml","tenantCode":"zee"}'
+spec:
+  metadata:
+    id: athena.configuration.module.ttms.form-factor-provider
+    name: athena.configuration.module.ttms.form-factor-provider
+    description: athena.configuration.module.ttms.form-factor-provider
+    tenantId: '600309'
+    tenantCode: zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":{"code":{"enum":["CMS","WMS","WCMS","TTMS","UIDMS","PMS","PCMS","UPIMS","PKMS","DIDMS"]},"description":{"type":"string"},"required":["code","description","status"],"status":{"enum":["ACTIVE","INACTIVE","DELETED"]}},"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      code: TTMS
+      description: Tethys Tokenization Management System
+      status: ACTIVE

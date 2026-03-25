@@ -1,0 +1,31 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-bankruptcy-mbbk6
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusBankruptcy
+  code: MBBK6
+  description: Bankruptcy informed
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: Bankruptcy Informed.
+    id: aether.classification-unit.manual-bundle-status-bankruptcy-mbbk6
+    name: mbbk6
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: Bankruptcy Informed
+  restrictedActionCodes:
+    - REISSUE_CARD
+    - RENEW_CARD
+    - CARD_CASH_PLACE_HOLD
+    - CARD_REPLACEMENT
+    - CARD_PURCHASE_PLACE_HOLD
+    - REPLACE_CARD
+  tenantId: '600309'

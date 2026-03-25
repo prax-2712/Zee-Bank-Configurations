@@ -1,0 +1,35 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: Zee.athena.configuration.module.cms.form-factor-provider
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-us.Zee","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-us.Zee.git","filePath":"/.defaults/module_configurations/module_athena/tree/root/t0/module_configurations/module_athena/form_factor_provider/form_factor_provider_cms.yaml","tenantCode":"Zee"}'
+spec:
+  metadata:
+    id: athena.configuration.module.cms.form-factor-provider
+    name: cms
+    description: Form Factor Provider for Zee
+    requester:
+      module: athena
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: Zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":{"code":{"enum":["CMS","WMS","WCMS","TTMS","UIDMS","PMS","PCMS","UPIMS","PKMS","DIDMS"]},"description":{"type":"string"},"required":["code","description","status"],"status":{"enum":["ACTIVE","INACTIVE","DELETED"]}},"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      code: CMS
+      description: Card Management System
+      status: ACTIVE
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.athena.form-factor-provider
+    displayName: Form Factor Provider Zee

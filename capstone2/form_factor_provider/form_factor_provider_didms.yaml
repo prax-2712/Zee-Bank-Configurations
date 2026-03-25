@@ -1,0 +1,36 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.athena.configuration.module.didms.form-factor-provider
+  labels:
+    module: athena
+    rrsd.zetaapps.in/space: aws-default-pp-us
+    rrsd.zetaapps.in/day: day-zero
+  namespace: athena
+spec:
+  metadata:
+    id: athena.configuration.module.didms.form-factor-provider
+    name: didms
+    description: Form Factor Provider for zee
+    requester:
+      module: athena
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":{"code":{"enum":["CMS","WMS","WCMS","TTMS","UIDMS","PMS","PCMS","UPIMS","PKMS","DIDMS"]},"description":{"type":"string"},"required":["code","description","status"],"status":{"enum":["ACTIVE","INACTIVE","DELETED"]}},"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      code: DIDMS
+      description: Device Id Form Factor Provider
+      status: ACTIVE
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.athena.form-factor-provider
+    displayName: Form Factor Provider zee

@@ -1,0 +1,73 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.aether.configuration.product.bankzee.definition.bundle
+  labels:
+    rrsd.zetaapps.in/day: day-one
+spec:
+  metadata:
+    id: aether.configuration.product.bankzee.definition.bundle
+    name: Bank Zee Premium Bundle Definition
+    description: Master rule book for the Black Infinite affluent credit product.
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      associationCardinality: Single # One premium bundle per customer 
+      classificationFunction: ''
+      classificationUnits:
+        # --- UNIT 1: Active Premium State ---
+        - code: ACTIVE
+          name: Premium Active
+          description: Default state for issued affluent bundles.
+          icon: https://bankzee.com/icons/active.png
+          infoUri: https://bankzee.com/terms
+          attributes:
+            allowLoungeAccess: true # Premium perk for affluent tier
+            conciergeEnabled: true
+            ISSUE_INACTIVE_CARD: true # Card requires activation flow
+            APPLY_SPEND_LIMITS: true # Automated activation trigger
+          restrictedActionCodes: []
+
+        # --- UNIT 2: Regulatory Delinquency State ---
+        - code: DELINQUENT_30
+          name: Soft Hold (30 DPD)
+          description: Restrictions applied after first missed payment per US Reg Z. 
+          icon: https://bankzee.com/icons/hold.png
+          infoUri: https://bankzee.com/delinquency-policy
+          attributes:
+            allowLoungeAccess: false # Revoke perks during delinquency
+            graceDays: 3 # Standard US operational buffer
+          restrictedActionCodes:
+            - CARD_CASH_PLACE_HOLD # Block cash advances
+            - CARD_PURCHASE_PLACE_HOLD # Block new spending
+            - CARD_REPLACEMENT # Block metal card shipping
+            - EMI_CONVERSION # No new installment loans 
+            - LIMIT_ENHANCEMENT # Reg Z compliance: No limit increases 
+            - BILLING_CYCLE_UPDATE # Prevent payment date manipulation
+
+      code: BZPCC_STATUS_MAP
+      description: Premium Credit Bundle linking Ledger, Card, and Rewards. 
+      modelType: Collection
+      name: Bank Zee Premium Bundle Definition
+      objectType: in.zeta.aether.bundle   #“This configuration is for a bundle object in Aether”
+      
+      # Mapping the core "WHAT" components 
+      productMappings:
+        accountProduct:
+          productCode: BZ_PREM_ACC_001 # Ruby Ledger
+          productFamilyCode: BZ_PREM_PF_ACC_001
+        paymentProduct:
+          productCode: BZ_MC_WORLD_ELITE # Athena/Acropolis Network
+          productFamilyCode: BZ_MC_WOrLD_PF_PAY_001
+        rewardProduct:
+          productCode: BZ_PREM_REWARD_001 # Luminos Rewards Engine
+          productFamilyCode: BZ_PREM_PF_REWARD_001
+      shortCode: BUNUS05933

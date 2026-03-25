@@ -1,0 +1,40 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: Zee.athena.configuration.module.credit-payment-account-provider.payment-account-provider
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+  annotations:
+    zeta.tech/resource-tags: '{"gitDbRepo":"tenant_configuration.aws-default-pp-US.Zee","gitDbPath":"https://gitea.internal.mum1-pp.zetaapps.in/zetaengg/tenant_configuration.aws-default-pp-US.Zee.git","filePath":"/.defaults/module_configurations/module_athena/tree/root/t0/module_configurations/module_athena/payment_account_provider/payment_account_provider_credit-payment-account-provider.yaml","tenantCode":"Zee"}'
+spec:
+  metadata:
+    id: athena.configuration.module.credit-payment-account-provider.payment-account-provider
+    name: credit-payment-account-provider
+    description: Payment Account Provider for null
+    requester:
+      module: athena
+      moduleVersion: 0.0.1
+    tenantId: '600309'
+    tenantCode: Zee
+  config:
+    format: YAML
+    schemaUrl: http://localhost
+    schemaInlineContent: |
+      {"properties":{"actions":{"items":{"properties":{"artemisAction":{"enum":["command","query"]},"baseUrl":{"type":"string"},"status":{"enum":["ACTIVE","INACTIVE","DELETED"]}},"type":"object"},"type":"array"},"attributes":{"additionalProperties":{"type":"object"},"type":"object"},"authorizationGatewayCodes":{"items":{"type":"string"},"type":"array"},"code":{"type":"string"},"description":{"type":"string"},"name":{"type":"string"},"providedAccountSchemaURI":{"type":"string"},"status":{"enum":["ACTIVE","INACTIVE"]},"tags":{"items":{"pattern":"^tag://[a-zA-Z0-9-]+/.{1,255}$","type":"string"},"type":"array"}},"required":["name","code","status"],"type":"object"}
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      authorizationGatewayCodes:
+        - AGAURA003
+        - AGAURA004
+      code: PAPVZZIN00001
+      description: Credit Card Payment Account Provider for RBL
+      name: Payment Account Provider for RBL
+      providedAccountSchemaURI: schema://subjects/id-data-schema/versions/1
+      status: ACTIVE
+  viewConfig:
+    angelosSchema:
+      view:
+        entityId: angelos.athena.payment-account-provider
+    displayName: Payment Account Provider null

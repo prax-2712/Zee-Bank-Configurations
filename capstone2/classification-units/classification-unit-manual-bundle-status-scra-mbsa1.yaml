@@ -1,0 +1,40 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-scra-mbsa1
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusSCRA
+  code: MBSA1
+  description: Scra
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: SCRA.
+    id: aether.classification-unit.manual-bundle-status-scra-mbsa1
+    name: mbsa1
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: SCRA
+  restrictedActionCodes:
+    - OVERLIMIT_FEE
+    - JOINING_FEE
+    - ANNUAL_FEE
+    - LATE_PAYMENT_FEE
+    - FOREX_MARKUP_ADVANCE_FEE
+    - FOREX_MARKUP_FEE
+    - CASH_ADVANCE_FEE
+    - SERVICE_FEE
+    - CARD_REPLACEMENT_FEE
+    - REPAYMENT_FEE
+    - REPAYMENT_REVERSAL_WITH_FEE
+    - MINIMUM_INTEREST_FEE
+    - ACCOUNT_SETUP_FEE
+    - ADD_ON_USER_JOINING_FEE
+    - MANUAL_ADD_ON_USER_FEE
+  tenantId: '600309'

@@ -1,0 +1,34 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-deceased-mbad1
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusDeceased
+  code: MBAD1
+  description: Deceased initiated
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: Deceased Initiated.
+    id: aether.classification-unit.manual-bundle-status-deceased-mbad1
+    name: mbad1
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: Deceased Initiated
+  restrictedActionCodes:
+    - LIMIT_ENHANCEMENT
+    - REISSUE_CARD
+    - RENEW_CARD
+    - CARD_CASH_PLACE_HOLD
+    - CARD_REPLACEMENT
+    - BILLING_CYCLE_UPDATE
+    - CARD_PURCHASE_PLACE_HOLD
+    - REPLACE_CARD
+    - DAYS_PAST_DUE
+  tenantId: '600309'

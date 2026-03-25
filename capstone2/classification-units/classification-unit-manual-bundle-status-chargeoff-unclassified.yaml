@@ -1,0 +1,27 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-chargeoff-unclassified
+spec:
+  attributes:
+    graceDays: '0'
+    isPermanent: 'false'
+  classificationModelCode: manualBundleStatusChargeOff
+  code: UNCLASSIFIED
+  description: unclassified
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: UNCLASSIFIED.
+    id: aether.classification-unit.manual-bundle-status-chargeoff-unclassified
+    name: unclassified
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: UNCLASSIFIED
+  restrictedActionCodes: []
+  tenantId: '600309'

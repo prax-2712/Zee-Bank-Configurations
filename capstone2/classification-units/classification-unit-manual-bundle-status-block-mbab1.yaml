@@ -1,0 +1,34 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-block-mbab1
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusBlock
+  code: MBAB1
+  description: Account block - Temporary
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: Account Block - Temporary.
+    id: aether.classification-unit.manual-bundle-status-block-mbab1
+    name: mbab1
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: Account Block - Temporary
+  restrictedActionCodes:
+    - LIMIT_ENHANCEMENT
+    - REISSUE_CARD
+    - RENEW_CARD
+    - CARD_CASH_PLACE_HOLD
+    - CARD_REPLACEMENT
+    - BILLING_CYCLE_UPDATE
+    - CARD_PURCHASE_PLACE_HOLD
+    - REPLACE_CARD
+    - ALL_AUTHORIZATION
+  tenantId: '600309'

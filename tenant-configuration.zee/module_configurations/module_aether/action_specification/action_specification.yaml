@@ -1,0 +1,86 @@
+kind: Configuration
+apiVersion: rrsd.zetaapps.in/v1alpha1
+metadata:
+  name: zee.aether.configuration.module.acropolis.card-dispatch.action-specification
+  labels:
+    rrsd.zetaapps.in/day: day-zero
+spec:
+  metadata:
+    id: aether.configuration.module.acropolis.card-dispatch.action-specification
+    name: Bank Zee Premium Card Dispatch Action Specification
+    description: Configuration for dispatching the high-limit physical metal card to premium customers.
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantId: '802156'
+    tenantCode: zee
+  config:
+    format: YAML
+    key: key
+    isEncrypted: false
+    useVault: false
+    value:
+      artefactProvider: ACROPOLIS
+      artefactType: CARD
+      description: Dispatch physical metal card via expedited shipping
+      extensionPoint:
+        extensionArguments:
+          - objectName: $requestArgs
+            sampleObject:
+              requestPayload:
+                additionalAttributes:
+                  
+                  productName: Bank Zee Black Infinite
+                  trackingId: BZ-US-EXP-77821
+                deliveryAddress:
+                  name: John Doe
+                  addressLine1: 308 Herbert Mountain
+                  addressLine2: Suite 1200
+                  city: West Herminialand
+                  state: Texano # US State Code
+                  country: US # US Country Code
+                  postalCode: '56568' # US Postal Code
+                  contactNumber: '18005550199' # US Support Format
+                fourthLineEmbossing: BANK ZEE PREMIUM
+                plasticCode: METAL_BLACK_18G # 18g Metal Form Factor
+                thirdLineEmbossing: John Doe
+              token: BZ_Auth_2026_Secure
+            schemaFormat: JSON
+            schemaReference: sch-aas://cardDispatchRequestArgs
+        extensionReturnObject:
+          objectName: cardDispatchApiRequest
+          sampleObject:
+            additionalAttributes:
+              cashLimit: '10000'
+              creditLimit: '100000'
+              productName: Bank Zee Black Infinite
+            deliveryAddress:
+              name: John Doe
+              addressLine1: 308 Herbert Mountain
+              city: West Herminialand
+              state: Texano
+              country: US
+              postalCode: '56568'
+            plasticCode: METAL_BLACK_18G
+          schemaFormat: JSON
+          schemaReference: sch-aas://cardDispatchExtensionReturnObject
+        state: ENABLED
+        supportedExtensionTypes:
+          - TRANSFORMER
+        transformers:
+          - chainSequenceNum: 1
+            function:
+              arguments:
+                - name: requestArgs
+                  value: $requestArgs
+              name: validateAndEnrichPremiumDispatch
+            script:
+              # US-Specific Validation Logic
+              content: "function validateAndEnrichPremiumDispatch(requestArgs) { var requiredFields = ['deliveryAddress', 'plasticCode']; var areAllFieldsPresent = requiredFields.every(function(field) { return requestArgs.hasOwnProperty(field); }); if (areAllFieldsPresent) { return { 'plasticCode': 'METAL_BLACK_18G', 'thirdLineEmbossing': requestArgs.deliveryAddress.name, 'deliveryAddress': requestArgs.deliveryAddress, 'additionalAttributes': { 'cashLimit': '10000', 'creditLimit': '100000', 'shippingPriority': 'HIGH' } }; } return JSON.parse(httpRequest({'method': 'GET', 'url': 'https://api.bankzee.com/enrich-dispatch', 'headers': [{'name': 'X-Zeta-AuthToken', 'value': requestArgs.token}]}).content.text); }"
+              format: JS
+              type: INLINE
+            state: ENABLED
+      name: Card Dispatch
+      slug: dispatchCard
+      tenantID: '802156'
+  

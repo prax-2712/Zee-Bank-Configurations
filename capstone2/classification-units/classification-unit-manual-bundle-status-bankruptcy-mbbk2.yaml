@@ -1,0 +1,32 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-bankruptcy-mbbk2
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusBankruptcy
+  code: MBBK2
+  description: Bankruptcy closed
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: Bankruptcy Closed.
+    id: aether.classification-unit.manual-bundle-status-bankruptcy-mbbk2
+    name: mbbk2
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: Bankruptcy Closed
+  restrictedActionCodes:
+    - REISSUE_CARD
+    - RENEW_CARD
+    - CARD_CASH_PLACE_HOLD
+    - CARD_REPLACEMENT
+    - CARD_PURCHASE_PLACE_HOLD
+    - REPLACE_CARD
+   
+  tenantId: '600309'

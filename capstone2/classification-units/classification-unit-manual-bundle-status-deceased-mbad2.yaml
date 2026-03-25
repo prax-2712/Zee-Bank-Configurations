@@ -1,0 +1,41 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-deceased-mbad2
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusDeceased
+  code: MBAD2
+  description: deceased
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: Deceased.
+    id: aether.classification-unit.manual-bundle-status-deceased-mbad2
+    name: mbad2
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: Deceased
+  restrictedActionCodes:
+    - LIMIT_ENHANCEMENT
+    - OVERLIMIT_FEE
+    - JOINING_FEE
+    - CARD_CASH_PLACE_HOLD
+    - CARD_REPLACEMENT
+    - LATE_PAYMENT_FEE
+    - ACCOUNT_SETUP_FEE
+    - REPLACE_CARD
+    - REISSUE_CARD
+    - RENEW_CARD
+    - ANNUAL_FEE
+    - INTEREST_LIQUIDATION
+    - BILLING_CYCLE_UPDATE
+    - CARD_PURCHASE_PLACE_HOLD
+    - DELINQUENCY_FREEZE
+    - NOTIFICATION_TEST_1
+  tenantId: '600309'

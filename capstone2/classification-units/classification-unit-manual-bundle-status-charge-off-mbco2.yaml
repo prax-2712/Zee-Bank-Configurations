@@ -1,0 +1,44 @@
+apiVersion: rrsd.zetaapps.in/v1alpha1
+kind: ClassificationUnit
+metadata:
+  labels:
+    rrsd.zetaapps.in/day: day-minus-one
+  name: zee.aether.classification-unit.manual-bundle-status-charge-off-mbco2
+spec:
+  attributes: {}
+  classificationModelCode: manualBundleStatusChargeOff
+  code: MBCO2
+  description: Manual Charge Off - Final
+  icon: https://icon.yuko
+  infoUri: https://info.com
+  metadata:
+    description: Manual Charge off - Final.
+    id: aether.classification-unit.manual-bundle-status-charge-off-mbco2
+    name: mbco2
+    requester:
+      module: aether
+      moduleVersion: 0.0.1
+    tenantCode: zee
+    tenantId: '600309'
+  name: Manual Charge off - Final
+  restrictedActionCodes:
+    - LIMIT_ENHANCEMENT
+    - OVERLIMIT_FEE
+    - JOINING_FEE
+    - CARD_CASH_PLACE_HOLD
+    - CARD_REPLACEMENT
+    - LATE_PAYMENT_FEE
+    - REPLACE_CARD
+    - REISSUE_CARD
+    - RENEW_CARD
+    - ANNUAL_FEE
+    - INTEREST_LIQUIDATION
+    - BILLING_CYCLE_UPDATE
+    - STATEMENT_GENERATION_HOLD
+    - CARD_PURCHASE_PLACE_HOLD
+    - FOREX_MARKUP_ADVANCE_FEE
+    - FOREX_MARKUP_FEE
+    - CASH_ADVANCE_FEE
+    - SERVICE_FEE
+    - CARD_REPLACEMENT_FEE
+  tenantId: '600309'
